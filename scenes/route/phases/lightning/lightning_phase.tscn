@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://nloo3r2hk6h4"]
+
+[ext_resource type="Script" uid="uid://yvpd36p5twbl" path="res://scenes/route/phases/lightning/lightning_phase.gd" id="1_e0uyd"]
+
+[sub_resource type="Curve2D" id="Curve2D_e0uyd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 224, 0, 0, 0, 0, 0, -32, 0)
+}
+point_count = 2
+
+[node name="LightningPhase" type="Node"]
+script = ExtResource("1_e0uyd")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -99
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.337255, 0.215686, 0.32549, 1)
+
+[node name="Clouds" type="Path2D" parent="."]
+curve = SubResource("Curve2D_e0uyd")

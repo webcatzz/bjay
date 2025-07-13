@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://frob5yrgl4h6"]
+
+[ext_resource type="FontFile" uid="uid://bg5yyr4tgajid" path="res://assets/fonts/twig.ttf" id="1_a3t03"]
+
+[resource]
+base_font = ExtResource("1_a3t03")
+spacing_top = -5

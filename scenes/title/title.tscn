@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhlcn6ahmfn20"]
+
+[ext_resource type="Script" uid="uid://da4764nleuy3y" path="res://scenes/title/title.gd" id="1_gl121"]
+[ext_resource type="StyleBox" uid="uid://cqtd6d34rg377" path="res://assets/ui/paper.tres" id="2_7hvf5"]
+[ext_resource type="PackedScene" uid="uid://nosj7aeffc0h" path="res://scenes/ui/dialogue_option.tscn" id="3_yjwoi"]
+
+[node name="Title" type="Node"]
+script = ExtResource("1_gl121")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.533333, 0.831373, 0.890196, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -18.5
+offset_right = 20.5
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_7hvf5")
+
+[node name="VBox" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="Play" parent="PanelContainer/VBox" instance=ExtResource("3_yjwoi")]
+layout_mode = 2
+text = "Start"
+
+[node name="Quit" parent="PanelContainer/VBox" instance=ExtResource("3_yjwoi")]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/VBox/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="PanelContainer/VBox/Quit" to="." method="_on_quit_pressed"]

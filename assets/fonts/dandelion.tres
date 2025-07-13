@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://2dxcelrj36ss"]
+
+[ext_resource type="FontFile" uid="uid://c3mr5qjo2wkpx" path="res://assets/fonts/dandelion.ttf" id="1_r7523"]
+
+[resource]
+base_font = ExtResource("1_r7523")
+spacing_top = -2
+spacing_bottom = -1

@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cqtd6d34rg377"]
+
+[ext_resource type="Texture2D" uid="uid://5sogetn872js" path="res://assets/paper.png" id="1_ytsn3"]
+
+[resource]
+content_margin_left = 9.0
+content_margin_top = 9.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_ytsn3")
+texture_margin_left = 2.0
+texture_margin_top = 18.0
+texture_margin_right = 9.0
+texture_margin_bottom = 3.0

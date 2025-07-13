@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://0ke6fe2cvbxa"]
+
+[ext_resource type="Script" uid="uid://bwavtp0ae4ffs" path="res://scenes/route/phases/droplets/droplet_phase.gd" id="1_6i1rc"]
+
+[sub_resource type="Curve2D" id="Curve2D_6i1rc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 224, 24, 64, 0, -64, 0, 96, -8, 0, 0, 48, 0, -32, 24)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_n5nx5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 224, 120, 64, 0, -64, 0, 96, 152, 0, 0, 0, 0, -32, 120)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_xshdj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 192, 72, 32, 0, -32, 0, 128, 104, 32, 0, -32, 0, 64, 40, 0, 0, 0, 0, 0, 72)
+}
+point_count = 4
+
+[node name="DropletPhase" type="Node"]
+script = ExtResource("1_6i1rc")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -99
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.556863, 0.682353, 0.658824, 1)
+
+[node name="CloudsTop" type="Path2D" parent="."]
+curve = SubResource("Curve2D_6i1rc")
+
+[node name="CloudsBottom" type="Path2D" parent="."]
+curve = SubResource("Curve2D_n5nx5")
+
+[node name="Wave" type="Path2D" parent="."]
+visible = false
+curve = SubResource("Curve2D_xshdj")

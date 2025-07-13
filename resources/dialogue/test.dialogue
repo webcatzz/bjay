@@ -1,0 +1,69 @@
+start intro
+
+as Charles
+It was an aesthetic education to live within those walls.
+x Since the days when, as a schoolboy,
+x I used to bicycle round the neighbouring parishes,
+x rubbing brasses and photographing fonts,
+x I had nursed a love of architecture,
+x but my sentiments at heart were insular and medieval.
+x This was my conversion to the Baroque.
+
+as Charles
+Why is this house called a "castle"?
+
+as Sebastian
+Because it used to be one until they moved it.
+
+opt What *can* you mean?
+
+	as Sebastian
+	Just that.
+	It used to be a castle about a mile away, down by the village.
+	Then when they took a fancy to the valley
+	and pulled the castle down, carted it stone by stone up here,
+	and built a new house.
+	I'm rather glad they did, aren't you?
+	
+	seek intro
+
+opt (Dismiss it.)
+
+	as Charles
+	If it was mine, I couldn't live anywhere else.
+	
+	as Sebastian
+	But it isn't really mine.
+	I mean, just at the moment it is,
+	but usually it's full of ravening beasts.
+	
+	as Charles
+	If it could only be like this always --
+	always alone, always summer,
+	the fruit always ripe,
+	and Aloysius always in a good temper.
+	
+	stop
+
+opt roll him down the hill
+
+as Sebastian
+Charles! Charles!
+Aloysius!
+
+as Charles
+Are you all right?
+
+as Sebastian
+Very funny.
+
+as Charles
+How's the ankle?
+
+as Sebastian
+Very, very funny.
+
+as Charles
+Come on. I suppose you'll be in bed for months now.
+
+stop

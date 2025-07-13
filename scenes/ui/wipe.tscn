@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://by05xaes2epwv"]
+
+[ext_resource type="Script" uid="uid://5qxrgm2oamja" path="res://scenes/ui/wipe.gd" id="1_6b0bu"]
+[ext_resource type="StyleBox" uid="uid://bfguhsbijb8is" path="res://assets/ui/wipe_1.tres" id="1_rlunr"]
+
+[node name="Wipe" type="Panel"]
+anchors_preset = -1
+anchor_left = -1.0
+anchor_right = 2.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_rlunr")
+script = ExtResource("1_6b0bu")

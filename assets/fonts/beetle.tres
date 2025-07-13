@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://bncotpivm8rm0"]
+
+[ext_resource type="FontFile" uid="uid://c0gjeltmd68to" path="res://assets/fonts/beetle.ttf" id="1_lxh7m"]
+
+[resource]
+base_font = ExtResource("1_lxh7m")
+spacing_top = -6
+spacing_bottom = -1

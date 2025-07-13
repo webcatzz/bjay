@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bct6qtt7gywyj"]
+
+[ext_resource type="Texture2D" uid="uid://b2rlhjnlgy2k2" path="res://assets/map_star.png" id="1_kj77o"]
+[ext_resource type="Script" uid="uid://bg1aote8m1gmk" path="res://scenes/route/parts/map_star.gd" id="2_y5etg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5etg"]
+atlas = ExtResource("1_kj77o")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v135"]
+atlas = ExtResource("1_kj77o")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dvnj"]
+atlas = ExtResource("1_kj77o")
+region = Rect2(14, 0, 7, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mse1p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5etg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v135")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dvnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v135")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="MapStar" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_mse1p")
+autoplay = "default"
+frame_progress = 0.525041
+offset = Vector2(-0.5, -0.5)
+script = ExtResource("2_y5etg")

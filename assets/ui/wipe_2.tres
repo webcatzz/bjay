@@ -1,0 +1,8 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bev6e8i53dfbi"]
+
+[ext_resource type="Texture2D" uid="uid://by7f0chih6wxo" path="res://assets/wipe_2.png" id="1_tbw54"]
+
+[resource]
+texture = ExtResource("1_tbw54")
+texture_margin_left = 88.0
+texture_margin_right = 83.0

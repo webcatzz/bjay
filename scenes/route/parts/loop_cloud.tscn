@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxwthqugg3k2u"]
+
+[ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="1_7cuqo"]
+[ext_resource type="Script" uid="uid://414iot25ceo6" path="res://scenes/route/parts/loop_cloud.gd" id="1_goh5p"]
+
+[node name="LoopCloud" type="PathFollow2D" groups=["loop_cloud"]]
+material = ExtResource("1_7cuqo")
+rotates = false
+cubic_interp = false
+script = ExtResource("1_goh5p")

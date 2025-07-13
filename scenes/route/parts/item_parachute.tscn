@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://5j3yvpebim50"]
+
+[ext_resource type="Script" uid="uid://bgcgv4sk4adil" path="res://scenes/route/parts/item_parachute.gd" id="1_dg3s6"]
+[ext_resource type="Texture2D" uid="uid://bxybkfk4ogfwd" path="res://assets/package.png" id="1_xkceq"]
+[ext_resource type="Texture2D" uid="uid://c2bscx1uxu15h" path="res://assets/parachute.png" id="2_ca0ed"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dg3s6"]
+radius = 6.0
+
+[node name="ItemParachute" type="Node2D"]
+script = ExtResource("1_dg3s6")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_xkceq")
+
+[node name="Parachute" type="Sprite2D" parent="."]
+texture = ExtResource("2_ca0ed")
+offset = Vector2(0, -8.5)
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_dg3s6")
+disabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="body_entered" from="Area" to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="Area/Collision" method="set_disabled" binds= [false]]

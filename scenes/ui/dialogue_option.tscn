@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://nosj7aeffc0h"]
+
+[ext_resource type="Texture2D" uid="uid://brvx3lrrh050r" path="res://assets/paper_line_selected.png" id="2_xxhle"]
+[ext_resource type="Texture2D" uid="uid://cb6gqmm7uamwa" path="res://assets/paper_line_activated.png" id="3_k76np"]
+[ext_resource type="Texture2D" uid="uid://70wbsobhtyx3" path="res://assets/option_cursor.png" id="3_wwunw"]
+[ext_resource type="Script" uid="uid://0x27mmnvbfxm" path="res://scenes/ui/dialogue_option.gd" id="3_xxhle"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xxhle"]
+texture = ExtResource("2_xxhle")
+texture_margin_bottom = 2.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_quwgj"]
+content_margin_left = 2.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+texture = ExtResource("3_k76np")
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7fn4m"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+
+[node name="DialogueOption" type="Button"]
+offset_right = 19.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0.403922, 0.576471, 0.835294, 1)
+theme_override_colors/font_focus_color = Color(0.356863, 0.305882, 0.8, 1)
+theme_override_colors/font_pressed_color = Color(0.996078, 1, 0.952941, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_xxhle")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_quwgj")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7fn4m")
+text = "Text"
+alignment = 0
+script = ExtResource("3_xxhle")
+
+[node name="Line" type="ColorRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.658824, 0.917647, 0.709804, 1)
+
+[node name="Cursor" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -4.0
+offset_bottom = 6.0
+grow_vertical = 2
+texture = ExtResource("3_wwunw")
+
+[connection signal="focus_entered" from="." to="Cursor" method="show"]
+[connection signal="focus_exited" from="." to="Cursor" method="hide"]
