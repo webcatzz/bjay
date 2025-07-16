@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://lap8y40sepq7"]
 
 [ext_resource type="Script" uid="uid://c3inrrquqo8es" path="res://scenes/route/phases/night/night_phase.gd" id="1_x4wib"]
-[ext_resource type="Script" uid="uid://dv7e33x4m16pj" path="res://scenes/route/parts/map.gd" id="2_c5284"]
+[ext_resource type="Script" uid="uid://dv7e33x4m16pj" path="res://scenes/route/phases/night/map_constellation.gd" id="2_c5284"]
 [ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="2_jtawh"]
 [ext_resource type="Texture2D" uid="uid://h7l07i48j8b4" path="res://assets/moon.png" id="4_x4wib"]
 [ext_resource type="Texture2D" uid="uid://cotruaty7lwqe" path="res://assets/moon_phase.png" id="5_c5284"]
@@ -130,6 +130,7 @@ region_rect = Rect2(8, 0, 8, 8)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="end"]

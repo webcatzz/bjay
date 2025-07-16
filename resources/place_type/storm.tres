@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="PlaceType" load_steps=5 format=3 uid="uid://cxji2rwvs0nc4"]
+[gd_resource type="Resource" script_class="PlaceType" load_steps=4 format=3 uid="uid://cxji2rwvs0nc4"]
 
-[ext_resource type="PackedScene" uid="uid://nloo3r2hk6h4" path="res://scenes/route/phases/lightning/lightning_phase.tscn" id="1_10p2a"]
 [ext_resource type="Texture2D" uid="uid://dd4oljy8xd4fm" path="res://assets/map_icons.png" id="1_puns2"]
 [ext_resource type="Script" uid="uid://hetqo4unus61" path="res://resources/place_type/place_type.gd" id="2_puns2"]
 
@@ -12,5 +11,4 @@ region = Rect2(16, 0, 8, 8)
 script = ExtResource("2_puns2")
 name = "storm"
 icon = SubResource("AtlasTexture_m1168")
-phase = ExtResource("1_10p2a")
 metadata/_custom_type_script = "uid://hetqo4unus61"

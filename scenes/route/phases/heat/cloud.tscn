@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq3ciykpbshjd"]
+
+[ext_resource type="Script" uid="uid://dw5fw1v1clky5" path="res://scenes/route/phases/heat/cloud.gd" id="1_h5yix"]
+[ext_resource type="Texture2D" uid="uid://134ffg6afk5j" path="res://assets/cloud.png" id="2_6oa2k"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6oa2k"]
+blend_mode = 3
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_h5yix"]
+resource_local_to_scene = true
+a = Vector2(-16, 0)
+b = Vector2(16, 0)
+
+[node name="Cloud" type="PathFollow2D"]
+rotates = false
+cubic_interp = false
+script = ExtResource("1_h5yix")
+speed = 32.0
+free_once_looped = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_6oa2k")
+offset = Vector2(0, -25)
+
+[node name="Shade" type="Polygon2D" parent="."]
+z_index = -99
+material = SubResource("CanvasItemMaterial_6oa2k")
+color = Color(0.2, 0.121569, 0.176471, 1)
+polygon = PackedVector2Array(-32, 0, 32, 0, 32, 32, -32, 32)
+
+[node name="Body" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="Body"]
+shape = SubResource("SegmentShape2D_h5yix")

@@ -2,35 +2,10 @@ extends Node
 
 signal inventory_changed
 signal health_changed
-signal moved
 
 var inventory: Array[Item]
-var health: int = 20 : set = _set_health
-
-var origin: Place
-var destination: Place
+var health: int = 100000000000 : set = _set_health
 var place: Place
-
-var map_places: Array[Place]
-var map_size := Vector2i(5, 3)
-
-
-# map
-
-func start() -> void:
-	var mapgen := preload("res://scenes/mapgen.gd").new()
-	mapgen.size = map_size
-	map_places = mapgen.generate(origin, destination)
-	place = origin
-
-
-func move_to(new_place: Place) -> void:
-	place = new_place
-	moved.emit()
-
-
-func end() -> void:
-	pass
 
 
 # inventory
@@ -51,7 +26,7 @@ func _set_health(value: int) -> void:
 	health = value
 	health_changed.emit()
 	if health <= 0:
-		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+		get_tree().change_scene_to_file.call_deferred("res://scenes/game_over.tscn")
 
 
 # init
@@ -61,7 +36,3 @@ func _ready() -> void:
 		var item := Item.new()
 		item.type = preload("res://resources/item_type/package.tres")
 		add_item(item)
-	
-	origin = Place.new()
-	destination = Place.new()
-	start()

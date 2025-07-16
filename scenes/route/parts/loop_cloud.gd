@@ -1,15 +1,10 @@
-extends PathFollow2D
+extends "res://scenes/route/parts/path_follower.gd"
 
 var radius: float : set = _set_radius
-var speed: float
 
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, radius, Color.WHITE)
-
-
-func _process(delta: float) -> void:
-	progress += speed * delta
 
 
 func _set_radius(value: float) -> void:

@@ -10,4 +10,10 @@ func _ready() -> void:
 func end() -> void:
 	map.set_physics_process(false)
 	Game.place = Game.place.next_places[map.player_idx]
-	route.wipe_to(Game.place.type.phase, self)
+	if Game.place == Map.destination:
+		Map.origin = Map.destination
+		Map.destination = Place.new()
+		Map.generate()
+		super()
+	else:
+		route.wipe_to(Game.place.type.phase, self)

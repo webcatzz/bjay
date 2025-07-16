@@ -6,7 +6,7 @@ func _ready() -> void:
 
 
 func populate_clouds() -> void:
-	var clouds: Path2D = $Clouds
+	var path: Path2D = $Clouds
 	
 	for i: int in 16:
 		var node := preload("res://scenes/route/parts/loop_cloud.tscn").instantiate()
@@ -14,7 +14,7 @@ func populate_clouds() -> void:
 		node.radius = randf_range(16.0, 32.0)
 		node.speed = randf_range(28.0, 36.0)
 		node.v_offset = Route.randf_along(1, node.radius)
-		clouds.add_child(node)
+		path.add_child(node)
 		node.progress_ratio = randf()
 	
 	for i: int in 32:
@@ -24,5 +24,5 @@ func populate_clouds() -> void:
 		node.speed = randf_range(14.0, 18.0)
 		node.v_offset = Route.randf_along(1, node.radius)
 		node.z_index = -1
-		clouds.add_child(node)
+		path.add_child(node)
 		node.progress_ratio = randf()

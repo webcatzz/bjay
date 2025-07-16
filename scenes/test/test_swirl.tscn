@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5nq44ku63usm"]
+
+[ext_resource type="Shader" uid="uid://crc87bu6486kh" path="res://assets/vfx/swirl.gdshader" id="1_w4mgc"]
+[ext_resource type="PackedScene" uid="uid://cwhbunmvfnble" path="res://scenes/test/test_camera.tscn" id="2_tg21a"]
+
+[sub_resource type="Gradient" id="Gradient_0p4kf"]
+colors = PackedColorArray(1, 0.4, 0, 1, 1, 0.2, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w4mgc"]
+gradient = SubResource("Gradient_0p4kf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w4mgc"]
+shader = ExtResource("1_w4mgc")
+shader_parameter/origin = Vector2(96, 32)
+shader_parameter/gradient = SubResource("GradientTexture1D_w4mgc")
+shader_parameter/stripe_count = 16
+shader_parameter/spin_speed = 0.125
+shader_parameter/flow_speed = 2.0
+
+[node name="TestSwirl" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_w4mgc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TestCamera" parent="." instance=ExtResource("2_tg21a")]
+position = Vector2(96, 72)

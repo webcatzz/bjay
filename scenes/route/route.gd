@@ -6,9 +6,13 @@ const Wipe = preload("res://scenes/ui/wipe.gd")
 
 const RECT := Rect2(0.0, 0.0, 192.0, 144.0)
 
+@export var first_phase: PackedScene = preload("res://scenes/route/phases/night/night_phase.tscn")
+
 @onready var player: Player = $Player
 @onready var wipe: Wipe = $Wipe
 
+
+# wipe
 
 func wipe_in() -> void:
 	player.z_index = wipe.z_index
@@ -23,30 +27,21 @@ func wipe_out() -> void:
 func wipe_to(scene: PackedScene, from: Node = null) -> void:
 	await wipe_in()
 	if from: from.queue_free()
+	player.reset_modulate()
 	add_child(scene.instantiate())
 	wipe_out()
 
 
-# ui
-
 func _ready() -> void:
-	_on_inventory_changed()
-	_on_health_changed()
-	Game.inventory_changed.connect(_on_inventory_changed)
-	Game.health_changed.connect(_on_health_changed)
-	add_child(preload("res://scenes/route/phases/night/night_phase.tscn").instantiate())
+	add_child(first_phase.instantiate())
 	wipe_out()
 
 
-func _on_inventory_changed() -> void:
-	$UI/MailCount.text = str(Game.inventory.size()) + " mail"
-
-
-func _on_health_changed() -> void:
-	$UI/HealthBar.value = Game.health
-
-
 # math
+
+static func along(axis: int, value: float) -> float:
+	return Route.RECT.position[axis] + Route.RECT.size[axis] * value
+
 
 static func randf_along(axis: int, extents: float = 0.0) -> float:
 	return randf_range(Route.RECT.position[axis] - extents, Route.RECT.end[axis] + extents)

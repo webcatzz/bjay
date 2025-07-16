@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvha12h4vy048"]
+
+[ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="1_i2tb1"]
+[ext_resource type="Script" uid="uid://ddtimsyeeshp3" path="res://scenes/route/phases/heat/beam.gd" id="1_p3r4r"]
+
+[sub_resource type="Animation" id="Animation_yn0ug"]
+resource_name = "intro"
+length = 5.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.2, 0, 0), Color(1, 0.2, 0, 0.5), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 0.2, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_i2tb1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cjjsv"]
+_data = {
+&"RESET": SubResource("Animation_i2tb1"),
+&"intro": SubResource("Animation_yn0ug")
+}
+
+[node name="Ray" type="Node2D"]
+z_index = 1
+material = ExtResource("1_i2tb1")
+script = ExtResource("1_p3r4r")
+color = Color(0.996078, 1, 0.952941, 1)
+
+[node name="Hitbox" type="Area2D" parent="."]
+process_mode = 4
+collision_layer = 0
+monitorable = false
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cjjsv")
+}
+autoplay = "intro"
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]

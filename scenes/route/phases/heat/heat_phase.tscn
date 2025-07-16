@@ -1,0 +1,237 @@
+[gd_scene load_steps=27 format=3 uid="uid://hf0ihssroege"]
+
+[ext_resource type="Script" uid="uid://bd1hanxx8sovm" path="res://scenes/route/phases/heat/heat_phase.gd" id="1_s6mc3"]
+[ext_resource type="Shader" uid="uid://crc87bu6486kh" path="res://assets/vfx/swirl.gdshader" id="2_0xbkd"]
+[ext_resource type="Texture2D" uid="uid://crpjsbd5rdg4x" path="res://assets/sun.png" id="3_0xbkd"]
+[ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="3_uxpnd"]
+[ext_resource type="Shader" uid="uid://uxv7ej1fqnju" path="res://assets/vfx/distortion.gdshader" id="7_0xbkd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iy45d"]
+shader = ExtResource("2_0xbkd")
+shader_parameter/origin = Vector2(96, 16)
+shader_parameter/stripe_count = 16
+shader_parameter/spin_speed = 0.125
+shader_parameter/flow_speed = 2.0
+
+[sub_resource type="Gradient" id="Gradient_0p4kf"]
+colors = PackedColorArray(1, 0.4, 0, 1, 1, 0.2, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w4mgc"]
+gradient = SubResource("Gradient_0p4kf")
+
+[sub_resource type="Gradient" id="Gradient_1h3ks"]
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 0.2, 0, 1, 1, 0.2, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uxpnd"]
+gradient = SubResource("Gradient_1h3ks")
+width = 1
+height = 144
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uxpnd"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_uxpnd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0xbkd"]
+gradient = SubResource("Gradient_uxpnd")
+width = 96
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Animation" id="Animation_iy45d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Sun/Light:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0xbkd"]
+resource_name = "flare"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Sun/Light:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 0.9, 0.95, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1, 1), Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1.5, 1.5)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.95),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"heat"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jilxx"]
+_data = {
+&"RESET": SubResource("Animation_iy45d"),
+&"flare": SubResource("Animation_0xbkd")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_w36h2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 224, 0, 0, 0, 0, 0, -32, 0)
+}
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_0xbkd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.6, 0.7, 0.8, 0.9)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iy45d"]
+gradient = SubResource("Gradient_0xbkd")
+width = 12
+height = 12
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_0xbkd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_iy45d"]
+curve = SubResource("Curve_0xbkd")
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0xbkd"]
+gradient = SubResource("Gradient_0p4kf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jilxx"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(96, 72, 1)
+spread = 180.0
+initial_velocity_max = 12.0
+orbit_velocity_min = -0.0499999
+orbit_velocity_max = 0.0500001
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+color_initial_ramp = SubResource("GradientTexture1D_0xbkd")
+alpha_curve = SubResource("CurveTexture_iy45d")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jilxx"]
+shader = ExtResource("7_0xbkd")
+shader_parameter/distortion = 4.0
+shader_parameter/wave_frequency = 4.0
+shader_parameter/wave_amplitude = 1.0
+shader_parameter/wave_speed = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0xbkd"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iy45d"]
+width = 192
+height = 144
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_0xbkd")
+
+[node name="HeatPhase" type="Node"]
+script = ExtResource("1_s6mc3")
+metadata/_custom_type_script = "uid://cya5l21i60qn2"
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -99
+material = SubResource("ShaderMaterial_iy45d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_w4mgc")
+expand_mode = 1
+
+[node name="Gradient" type="TextureRect" parent="Background"]
+material = ExtResource("3_uxpnd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_uxpnd")
+
+[node name="Sun" type="Sprite2D" parent="Background"]
+position = Vector2(96, 16)
+texture = ExtResource("3_0xbkd")
+
+[node name="Light" type="Sprite2D" parent="Background/Sun"]
+modulate = Color(0.447266, 0.335009, 0.0751266, 1)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_uxpnd")
+texture = SubResource("GradientTexture2D_0xbkd")
+
+[node name="Animator" type="AnimationPlayer" parent="Background/Sun"]
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_jilxx")
+}
+autoplay = "flare"
+
+[node name="CloudPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_w36h2")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+material = ExtResource("3_uxpnd")
+position = Vector2(96, 72)
+texture = SubResource("GradientTexture2D_iy45d")
+lifetime = 4.0
+randomness = 0.25
+process_material = SubResource("ParticleProcessMaterial_jilxx")
+
+[node name="Distortion" type="TextureRect" parent="."]
+z_index = 98
+material = SubResource("ShaderMaterial_jilxx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_iy45d")
+expand_mode = 1
+
+[node name="CloudTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="BeamTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="CloudTimer" to="." method="cloud"]
+[connection signal="timeout" from="BeamTimer" to="." method="rand_beam"]

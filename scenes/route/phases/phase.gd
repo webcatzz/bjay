@@ -8,5 +8,5 @@ func _ready() -> void:
 	await route.wipe_out()
 
 
-func wipe_to_night() -> void:
+func end() -> void:
 	route.wipe_to(preload("res://scenes/route/phases/night/night_phase.tscn"), self)

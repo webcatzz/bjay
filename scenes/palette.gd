@@ -4,6 +4,7 @@ const BLACK = Color("#282525")
 const BLUE = Color("#88d4e3")
 const BLUE_WHITE = Color("#bbddf1")
 const WHITE = Color("#fefff2")
+const RED = Color("#f2471c")
 
 const RAIN_DARK = Color("#759983")
 const RAIN_BACKGROUND = Color("#8eaea8")

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PlaceType" load_steps=5 format=3 uid="uid://dray2sfosxhcj"]
+
+[ext_resource type="Texture2D" uid="uid://dd4oljy8xd4fm" path="res://assets/map_icons.png" id="1_aito2"]
+[ext_resource type="Script" uid="uid://hetqo4unus61" path="res://resources/place_type/place_type.gd" id="2_lm3ne"]
+[ext_resource type="PackedScene" uid="uid://hf0ihssroege" path="res://scenes/route/phases/heat/heat_phase.tscn" id="2_vnddn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exnwf"]
+atlas = ExtResource("1_aito2")
+region = Rect2(24, 0, 8, 8)
+
+[resource]
+script = ExtResource("2_lm3ne")
+name = "heat"
+icon = SubResource("AtlasTexture_exnwf")
+phase = ExtResource("2_vnddn")
+metadata/_custom_type_script = "uid://hetqo4unus61"
