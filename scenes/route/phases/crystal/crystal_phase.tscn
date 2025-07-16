@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ygmaxrxrs82p"]
+
+[ext_resource type="Script" uid="uid://cya5l21i60qn2" path="res://scenes/route/phases/phase.gd" id="1_gqp7y"]
+
+[node name="CrystalPhase" type="Node"]
+script = ExtResource("1_gqp7y")
+metadata/_custom_type_script = "uid://cya5l21i60qn2"
