@@ -4,7 +4,7 @@ const SEPARATION := Vector2(24.0, 16.0)
 const BOB_DURATION: float = 4.0
 
 var nodes: Dictionary[Place, Node2D]
-var player_idx: int
+var branch: int
 
 
 func _ready() -> void:
@@ -32,11 +32,11 @@ func _draw() -> void:
 		for i: int in place.next_places.size():
 			var next_point: Vector2 = nodes[place.next_places[i]].position
 			var shrink: Vector2 = point.direction_to(next_point) * 8.0
-			method.call(point + shrink, next_point - shrink, Palette.NIGHT[(3 if i == player_idx else 2) if place == Game.place else 1])
+			method.call(point + shrink, next_point - shrink, Palette.NIGHT[(3 if i == branch else 2) if place == Game.place else 1])
 
 
 func _physics_process(_delta: float) -> void:
-	player_idx = remap(route.player.position.y, Route.RECT.position.y, Route.RECT.end.y, 0.0, Game.place.next_places.size())
+	branch = remap(route.player.position.y, Route.RECT.position.y, Route.RECT.end.y, 0.0, Game.place.next_places.size())
 	queue_redraw()
 
 

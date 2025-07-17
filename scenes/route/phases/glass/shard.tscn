@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1f6wj7b8846c"]
+
+[ext_resource type="Script" uid="uid://ci3aganqiuixg" path="res://scenes/route/phases/glass/shard.gd" id="1_dtjrl"]
+[ext_resource type="Texture2D" uid="uid://b3kljpkj6dcot" path="res://assets/shards.png" id="2_dtjrl"]
+[ext_resource type="PackedScene" uid="uid://ds5fphucp3sqr" path="res://scenes/route/parts/hitbox.tscn" id="3_ruxke"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6v36"]
+radius = 2.0
+
+[node name="Shard" type="Node2D"]
+script = ExtResource("1_dtjrl")
+metadata/_custom_type_script = "uid://b7f7bxwscbygq"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_dtjrl")
+hframes = 2
+
+[node name="Hitbox" parent="." instance=ExtResource("3_ruxke")]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_b6v36")

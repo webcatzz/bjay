@@ -35,7 +35,6 @@ func _ready() -> void:
 	tween.tween_interval(attack_delay)
 	await tween.finished
 	# strike
-	#route.background.flash(Palette.WHITE.lerp(Palette.THUNDER_BACKGROUND, 0.5), 0.0, 0.5)
 	line.points = generate_points(end)
 	line.width = 8.0
 	line.modulate.a = 1.0
@@ -56,5 +55,4 @@ func _add_collision(start: Vector2, end: Vector2) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body == route.player:
-		route.player.take_damage(25)
+	body.take_damage(25)

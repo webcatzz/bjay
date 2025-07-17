@@ -1,11 +1,13 @@
 extends Node
 
 const PLACE_WEIGHTS: Dictionary[String, float] = {
-	heat = 1.0,
+	glass = 1.0,
+	heat = 0.5,
 	lightning = 0.25,
 	#rain = 0.75,
 	#storm = 0.15,
 }
+
 
 var origin: Place
 var destination: Place

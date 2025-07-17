@@ -8,8 +8,23 @@ const RECT := Rect2(0.0, 0.0, 192.0, 144.0)
 
 @export var first_phase: PackedScene = preload("res://scenes/route/phases/night/night_phase.tscn")
 
+var phase: Phase
+
 @onready var player: Player = $Player
 @onready var wipe: Wipe = $Wipe
+
+
+func step(branch: int = 0 if Game.place.next_places.size() == 1 else -1) -> void:
+	await wipe_in()
+	if phase: phase.queue_free()
+	player.clear_modulate()
+	if branch == -1:
+		phase = preload("res://scenes/route/phases/night/night_phase.tscn").instantiate()
+	else:
+		Game.place = Game.place.next_places[branch]
+		phase = Game.place.type.phase.instantiate()
+	add_child(phase)
+	wipe_out()
 
 
 # wipe
@@ -24,16 +39,9 @@ func wipe_out() -> void:
 	player.z_index = 0
 
 
-func wipe_to(scene: PackedScene, from: Node = null) -> void:
-	await wipe_in()
-	if from: from.queue_free()
-	player.clear_modulate()
-	add_child(scene.instantiate())
-	wipe_out()
-
-
 func _ready() -> void:
-	add_child(first_phase.instantiate())
+	phase = first_phase.instantiate()
+	add_child(phase)
 	wipe_out()
 
 

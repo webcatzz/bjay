@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PlaceType" load_steps=5 format=3 uid="uid://cl4lifop6sftc"]
+
+[ext_resource type="Texture2D" uid="uid://dd4oljy8xd4fm" path="res://assets/map_icons.png" id="1_vn1da"]
+[ext_resource type="PackedScene" uid="uid://ygmaxrxrs82p" path="res://scenes/route/phases/glass/glass_phase.tscn" id="2_vn1da"]
+[ext_resource type="Script" uid="uid://hetqo4unus61" path="res://resources/place_type/place_type.gd" id="3_p2k0f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1168"]
+atlas = ExtResource("1_vn1da")
+region = Rect2(32, 0, 8, 8)
+
+[resource]
+script = ExtResource("3_p2k0f")
+name = "storm"
+icon = SubResource("AtlasTexture_m1168")
+phase = ExtResource("2_vn1da")
+metadata/_custom_type_script = "uid://hetqo4unus61"

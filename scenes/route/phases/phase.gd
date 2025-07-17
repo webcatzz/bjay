@@ -5,4 +5,4 @@ extends Node
 
 
 func end() -> void:
-	route.wipe_to(preload("res://scenes/route/phases/night/night_phase.tscn"), self)
+	route.step()
