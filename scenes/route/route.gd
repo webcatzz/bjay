@@ -27,7 +27,7 @@ func wipe_out() -> void:
 func wipe_to(scene: PackedScene, from: Node = null) -> void:
 	await wipe_in()
 	if from: from.queue_free()
-	player.reset_modulate()
+	player.clear_modulate()
 	add_child(scene.instantiate())
 	wipe_out()
 

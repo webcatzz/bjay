@@ -1,4 +1,4 @@
-extends "res://scenes/route/parts/path_follower.gd"
+extends PathFollower
 
 var radius: float : set = _set_radius
 
