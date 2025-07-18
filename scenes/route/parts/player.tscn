@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://byfvyojcv272m"]
+[gd_scene load_steps=22 format=3 uid="uid://byfvyojcv272m"]
 
 [ext_resource type="Script" uid="uid://d2x4hww6sgom5" path="res://scenes/route/parts/player.gd" id="1_hh32o"]
 [ext_resource type="Texture2D" uid="uid://mxgv3vnh17aa" path="res://assets/plane.png" id="1_rjpy8"]
@@ -101,6 +101,92 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d610k"]
 
+[sub_resource type="Animation" id="Animation_1hui5"]
+resource_name = "hurt"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-2, -1), Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Tail:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-2, 1), Vector2(1, -1), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Propeller:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-2, 1), Vector2(1, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_88tof"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Tail:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Propeller:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_88tof"]
+_data = {
+&"RESET": SubResource("Animation_88tof"),
+&"hurt": SubResource("Animation_1hui5")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_hh32o")
@@ -116,29 +202,37 @@ one_shot = true
 explosiveness = 0.75
 process_material = SubResource("ParticleProcessMaterial_4ho2n")
 
-[node name="Sprite" type="CanvasGroup" parent="."]
+[node name="Sprite" type="Node2D" parent="."]
+material = ExtResource("3_1hui5")
 
 [node name="Body" type="Sprite2D" parent="Sprite"]
+use_parent_material = true
 position = Vector2(3, 0)
 texture = ExtResource("1_rjpy8")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 22)
 
 [node name="Tail" type="AnimatedSprite2D" parent="Sprite"]
-position = Vector2(-17, -1)
+use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_4ho2n")
 autoplay = "default"
 frame_progress = 0.290023
+offset = Vector2(-17, -1)
 
 [node name="Propeller" type="AnimatedSprite2D" parent="Sprite"]
-position = Vector2(17, 0)
+use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_m0uxo")
 autoplay = "default"
 frame_progress = 0.193719
-offset = Vector2(0, 0.5)
+offset = Vector2(17, 0.5)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_d610k")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_88tof")
+}
 
 [node name="UI" type="CanvasLayer" parent="."]
 visible = false
@@ -163,7 +257,6 @@ grow_horizontal = 0
 text = "0 mail"
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="set_invincible" binds= [false]]

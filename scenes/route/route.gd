@@ -36,9 +36,9 @@ func step(branch: int = 0 if Game.place.next_places.size() == 1 else -1) -> void
 
 func wipe_in() -> void:
 	player.z_index = wipe.z_index
-	player.clear_modulate()
 	wipe.modulate = phase.wipe_color
 	await wipe.wipe_in()
+	player.clear_modulate()
 
 
 func wipe_out() -> void:

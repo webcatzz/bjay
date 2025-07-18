@@ -10,7 +10,8 @@ var heat: float : set = _set_heat
 
 var _modulates: Dictionary[String, Color]
 
-@onready var sprite: CanvasGroup = $Sprite
+@onready var sprite: Node2D = $Sprite
+@onready var animator: AnimationPlayer = $Animator
 @onready var heat_particles: GPUParticles2D = $HeatParticles
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 
@@ -20,6 +21,7 @@ var _modulates: Dictionary[String, Color]
 func take_damage(amount: int = 1) -> void:
 	if invincibility_timer.is_stopped():
 		Game.health -= amount
+		animator.play(&"hurt")
 		if Game.inventory.size():
 			parachute_item()
 		set_invincible(true)
