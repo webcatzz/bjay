@@ -9,7 +9,7 @@ func _get_name() -> String:
 
 
 func _get_supported_languages() -> PackedStringArray:
-	return ["dialogue"]
+	return ["dlg"]
 
 
 func _get_line_syntax_highlighting(idx: int) -> Dictionary:

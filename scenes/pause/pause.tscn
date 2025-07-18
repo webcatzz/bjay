@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpmcsv5ggd3c5"]
+
+[ext_resource type="StyleBox" uid="uid://cqtd6d34rg377" path="res://assets/ui/paper.tres" id="1_2vals"]
+[ext_resource type="PackedScene" uid="uid://nosj7aeffc0h" path="res://scenes/ui/dialogue_option.tscn" id="2_6npj3"]
+
+[node name="Pause" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -48.0
+offset_right = 72.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -4
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = ExtResource("1_2vals")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="Resume" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_6npj3")]
+layout_mode = 2
+text = "Resume"
+
+[node name="Inventory" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_6npj3")]
+layout_mode = 2
+text = "Inventory"
+
+[node name="Config" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_6npj3")]
+layout_mode = 2
+text = "Config"
+
+[node name="Quit" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_6npj3")]
+layout_mode = 2
+text = "Quit"
+
+[node name="Tabs" type="TabContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_2vals")
+current_tab = 0
+tabs_visible = false
+
+[node name="Inventory" type="VBoxContainer" parent="HBoxContainer/Tabs"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Tabs/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Tabs/Inventory/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -2
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Tabs/Inventory"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="HBoxContainer/Tabs/Inventory"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.403922, 0.576471, 0.835294, 1)
+text = "Lorem ipsum."
+
+[node name="Config" type="VBoxContainer" parent="HBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1

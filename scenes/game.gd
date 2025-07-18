@@ -7,6 +7,8 @@ var inventory: Array[Item]
 var health: int = 100000000000 : set = _set_health
 var place: Place : set = _set_place
 
+var babble_friendship: int
+
 
 # inventory
 
@@ -37,6 +39,14 @@ func _set_place(value: Place) -> void:
 		Map.origin = Map.destination
 		Map.destination = Place.new()
 		Map.generate()
+
+
+# pausing
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"ui_cancel"):
+		get_tree().paused = not get_tree().paused
+		$Pause.visible = get_tree().paused
 
 
 # init

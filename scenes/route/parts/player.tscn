@@ -1,10 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://byfvyojcv272m"]
+[gd_scene load_steps=19 format=3 uid="uid://byfvyojcv272m"]
 
 [ext_resource type="Script" uid="uid://d2x4hww6sgom5" path="res://scenes/route/parts/player.gd" id="1_hh32o"]
 [ext_resource type="Texture2D" uid="uid://mxgv3vnh17aa" path="res://assets/plane.png" id="1_rjpy8"]
 [ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="3_1hui5"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d610k"]
 
 [sub_resource type="Gradient" id="Gradient_iixtc"]
 offsets = PackedFloat32Array(0.7, 1)
@@ -47,12 +45,65 @@ scale_min = 0.5
 scale_curve = SubResource("CurveTexture_1uxg6")
 alpha_curve = SubResource("CurveTexture_1hui5")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hui5"]
+atlas = ExtResource("1_rjpy8")
+region = Rect2(0, 22, 12, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88tof"]
+atlas = ExtResource("1_rjpy8")
+region = Rect2(12, 22, 12, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uxg6"]
+atlas = ExtResource("1_rjpy8")
+region = Rect2(24, 22, 12, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ho2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hui5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88tof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hui5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1uxg6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ho2n"]
+atlas = ExtResource("1_rjpy8")
+region = Rect2(0, 40, 10, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6i3n"]
+atlas = ExtResource("1_rjpy8")
+region = Rect2(10, 40, 10, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m0uxo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ho2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6i3n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d610k"]
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_hh32o")
-
-[node name="Collision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_d610k")
 
 [node name="HeatParticles" type="GPUParticles2D" parent="."]
 modulate = Color(0.968627, 0.807843, 0.709804, 1)
@@ -65,11 +116,32 @@ one_shot = true
 explosiveness = 0.75
 process_material = SubResource("ParticleProcessMaterial_4ho2n")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="CanvasGroup" parent="."]
+
+[node name="Body" type="Sprite2D" parent="Sprite"]
+position = Vector2(3, 0)
 texture = ExtResource("1_rjpy8")
-offset = Vector2(0.5, 0.5)
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 22)
+
+[node name="Tail" type="AnimatedSprite2D" parent="Sprite"]
+position = Vector2(-17, -1)
+sprite_frames = SubResource("SpriteFrames_4ho2n")
+autoplay = "default"
+frame_progress = 0.290023
+
+[node name="Propeller" type="AnimatedSprite2D" parent="Sprite"]
+position = Vector2(17, 0)
+sprite_frames = SubResource("SpriteFrames_m0uxo")
+autoplay = "default"
+frame_progress = 0.193719
+offset = Vector2(0, 0.5)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d610k")
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HealthBar" type="ProgressBar" parent="UI"]
 offset_left = 2.0

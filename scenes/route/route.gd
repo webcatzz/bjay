@@ -14,15 +14,20 @@ var phase: Phase
 @onready var wipe: Wipe = $Wipe
 
 
+func _ready() -> void:
+	phase = first_phase.instantiate()
+	add_child(phase)
+	wipe_out()
+
+
 func step(branch: int = 0 if Game.place.next_places.size() == 1 else -1) -> void:
 	await wipe_in()
-	if phase: phase.queue_free()
-	player.clear_modulate()
+	phase.queue_free()
 	if branch == -1:
 		phase = preload("res://scenes/route/phases/night/night_phase.tscn").instantiate()
 	else:
 		Game.place = Game.place.next_places[branch]
-		phase = Game.place.type.phase.instantiate()
+		phase = Game.place.type.scene.instantiate()
 	add_child(phase)
 	wipe_out()
 
@@ -31,18 +36,15 @@ func step(branch: int = 0 if Game.place.next_places.size() == 1 else -1) -> void
 
 func wipe_in() -> void:
 	player.z_index = wipe.z_index
+	player.clear_modulate()
+	wipe.modulate = phase.wipe_color
 	await wipe.wipe_in()
 
 
 func wipe_out() -> void:
+	create_tween().tween_property(wipe, ^"modulate", phase.wipe_color, 0.25).set_trans(Tween.TRANS_CIRC)
 	await wipe.wipe_out()
 	player.z_index = 0
-
-
-func _ready() -> void:
-	phase = first_phase.instantiate()
-	add_child(phase)
-	wipe_out()
 
 
 # math

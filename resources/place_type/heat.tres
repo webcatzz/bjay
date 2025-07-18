@@ -12,5 +12,5 @@ region = Rect2(24, 0, 8, 8)
 script = ExtResource("2_lm3ne")
 name = "heat"
 icon = SubResource("AtlasTexture_exnwf")
-phase = ExtResource("2_vnddn")
+scene = ExtResource("2_vnddn")
 metadata/_custom_type_script = "uid://hetqo4unus61"

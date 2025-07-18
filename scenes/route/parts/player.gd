@@ -10,7 +10,7 @@ var heat: float : set = _set_heat
 
 var _modulates: Dictionary[String, Color]
 
-@onready var sprite: Sprite2D = $Sprite
+@onready var sprite: CanvasGroup = $Sprite
 @onready var heat_particles: GPUParticles2D = $HeatParticles
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 

@@ -17,7 +17,7 @@ var dialogue := Dialogue.new()
 
 
 func display(string: String, key: String = "") -> void:
-	dialogue.start(FileAccess.get_file_as_string("res://resources/dialogue/test.dialogue"), key)
+	dialogue.start(string, key)
 	animator.play(&"intro")
 
 

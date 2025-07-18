@@ -138,5 +138,5 @@ func reset_indent() -> void:
 
 func run(code: String) -> Variant:
 	var expr := Expression.new()
-	expr.parse(code)
-	return expr.execute()
+	expr.parse(code, ["Game"])
+	return expr.execute([Game])

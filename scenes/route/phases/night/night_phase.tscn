@@ -65,6 +65,7 @@ region = Rect2(0, 0, 8, 8)
 
 [node name="Night" type="Node"]
 script = ExtResource("1_x4wib")
+wipe_color = Color(0.254902, 0.164706, 0.317647, 1)
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -99
@@ -129,7 +130,7 @@ centered = false
 region_rect = Rect2(8, 0, 8, 8)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 one_shot = true
 autostart = true
 

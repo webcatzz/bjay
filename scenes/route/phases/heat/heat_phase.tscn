@@ -152,17 +152,18 @@ shader_parameter/wave_frequency = 4.0
 shader_parameter/wave_amplitude = 1.0
 shader_parameter/wave_speed = 1.0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0xbkd"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1h3ks"]
 frequency = 0.02
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iy45d"]
 width = 192
 height = 144
 generate_mipmaps = false
-noise = SubResource("FastNoiseLite_0xbkd")
+noise = SubResource("FastNoiseLite_1h3ks")
 
 [node name="HeatPhase" type="Node"]
 script = ExtResource("1_s6mc3")
+wipe_color = Color(0.968627, 0.807843, 0.709804, 1)
 metadata/_custom_type_script = "uid://cya5l21i60qn2"
 
 [node name="Background" type="TextureRect" parent="."]
