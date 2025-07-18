@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://deyivsvciba6k"]
+
+[ext_resource type="Script" uid="uid://d1kfaaslnavc0" path="res://scenes/route/phases/droplet/droplet_mama.gd" id="1_vken3"]
+[ext_resource type="Texture2D" uid="uid://bckokhqx4bg3p" path="res://assets/droplet_mama.png" id="2_x00on"]
+[ext_resource type="PackedScene" uid="uid://ds5fphucp3sqr" path="res://scenes/route/parts/hitbox.tscn" id="3_f6cto"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78644"]
+atlas = ExtResource("2_x00on")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty037"]
+atlas = ExtResource("2_x00on")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ovvl6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78644")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty037")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ty037"]
+resource_local_to_scene = true
+
+[node name="DropletMama" type="Node2D"]
+script = ExtResource("1_vken3")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ovvl6")
+autoplay = "default"
+frame_progress = 0.552875
+
+[node name="Hitbox" parent="." instance=ExtResource("3_f6cto")]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ty037")
+
+[connection signal="area_entered" from="Hitbox" to="." method="pop" unbinds=1]
+[connection signal="body_entered" from="Hitbox" to="." method="pop" unbinds=1]

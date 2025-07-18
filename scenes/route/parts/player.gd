@@ -41,8 +41,8 @@ func parachute_item() -> void:
 	var curve := Curve2D.new()
 	curve.add_point(position, Vector2.ZERO, Vector2(0.0, -32.0))
 	curve.add_point(Vector2(position.x + randf_range(-64.0, 64.0), Route.RECT.end.y + 6.0))
-	node.follow_path(curve, 32.0)
 	get_parent().add_child.call_deferred(node)
+	Route.guide.call_deferred(node, curve, 32.0)
 
 
 func _set_heat(value: float) -> void:

@@ -24,6 +24,7 @@ color = Color(0.533333, 0.831373, 0.890196, 1)
 curve = SubResource("Curve2D_e0uyd")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 autostart = true
 

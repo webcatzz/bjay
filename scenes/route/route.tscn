@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://hnnpjn746vu3"]
+[gd_scene load_steps=10 format=3 uid="uid://hnnpjn746vu3"]
 
-[ext_resource type="Script" uid="uid://iltnbgbl6utm" path="res://scenes/route/route.gd" id="1_8dlif"]
+[ext_resource type="Script" uid="uid://iltnbgbl6utm" path="res://scenes/route/route.gd" id="1_msb17"]
 [ext_resource type="PackedScene" uid="uid://byfvyojcv272m" path="res://scenes/route/parts/player.tscn" id="2_enbfm"]
+[ext_resource type="PackedScene" uid="uid://um1nlfot8tm0" path="res://scenes/route/phases/droplet/droplet_phase.tscn" id="2_ex5p1"]
 [ext_resource type="PackedScene" uid="uid://b5ffmn12701vc" path="res://scenes/route/parts/route_start.tscn" id="4_1gebr"]
 [ext_resource type="PackedScene" uid="uid://by05xaes2epwv" path="res://scenes/ui/wipe.tscn" id="4_ex5p1"]
 
@@ -17,7 +18,8 @@ normal = Vector2(1, 0)
 normal = Vector2(-1, 0)
 
 [node name="Route" type="Node"]
-script = ExtResource("1_8dlif")
+script = ExtResource("1_msb17")
+first_phase = ExtResource("2_ex5p1")
 
 [node name="Wipe" parent="." instance=ExtResource("4_ex5p1")]
 modulate = Color(0, 0, 0, 1)

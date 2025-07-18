@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1cvhsypk1pdo"]
+
+[ext_resource type="Texture2D" uid="uid://dg3m1svc64kw3" path="res://assets/droplet.png" id="1_55lkr"]
+[ext_resource type="PackedScene" uid="uid://ds5fphucp3sqr" path="res://scenes/route/parts/hitbox.tscn" id="2_lp6jd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r07u8"]
+atlas = ExtResource("1_55lkr")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpvfe"]
+atlas = ExtResource("1_55lkr")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqts7"]
+atlas = ExtResource("1_55lkr")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0vdia"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r07u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpvfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqts7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpvfe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r07u8"]
+resource_local_to_scene = true
+radius = 2.0
+
+[node name="Droplet" type="Node2D"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0vdia")
+autoplay = "default"
+frame_progress = 0.0317427
+
+[node name="Hitbox" parent="." instance=ExtResource("2_lp6jd")]
+collision_layer = 1
+monitorable = true
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_r07u8")
+disabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="Hitbox/Collision" method="set_disabled" binds= [false]]

@@ -71,3 +71,15 @@ static func edge(angle: float, origin: Vector2 = RECT.get_center()) -> Vector2:
 		return origin + Vector2(tan(PI * 0.5 - angle), 1.0) * support_offset.y
 	else:
 		return origin + Vector2(1.0, tan(angle)) * support_offset.x
+
+
+# paths
+
+static func guide(node: Node2D, curve: Curve2D, speed: float) -> void:
+	var tween := node.create_tween()
+	tween.tween_method(sample_path.bind(node, curve), 0.0, curve.get_baked_length(), curve.get_baked_length() / speed)
+	tween.tween_callback(node.queue_free)
+
+
+static func sample_path(at: float, node: Node2D, curve: Curve2D) -> void:
+	node.position = curve.sample_baked(at)

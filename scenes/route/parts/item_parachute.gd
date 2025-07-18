@@ -1,4 +1,4 @@
-extends RouteObject
+extends Node2D
 
 var item: Item
 

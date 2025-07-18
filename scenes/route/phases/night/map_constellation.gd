@@ -1,10 +1,12 @@
-extends RouteObject
+extends Node2D
 
 const SEPARATION := Vector2(24.0, 16.0)
 const BOB_DURATION: float = 4.0
 
 var nodes: Dictionary[Place, Node2D]
 var branch: int
+
+@onready var player: Node2D = get_tree().current_scene.player
 
 
 func _ready() -> void:
@@ -36,7 +38,7 @@ func _draw() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	branch = remap(route.player.position.y, Route.RECT.position.y, Route.RECT.end.y, 0.0, Game.place.next_places.size())
+	branch = remap(player.position.y, Route.RECT.position.y, Route.RECT.end.y, 0.0, Game.place.next_places.size())
 	queue_redraw()
 
 

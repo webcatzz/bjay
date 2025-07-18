@@ -1,4 +1,4 @@
-extends RouteObject
+extends Node2D
 
 const MAX_DEVIATION: float = 16.0
 

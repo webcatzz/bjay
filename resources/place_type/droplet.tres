@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlaceType" load_steps=5 format=3 uid="uid://ccc34pnttwq3l"]
+
+[ext_resource type="Texture2D" uid="uid://dd4oljy8xd4fm" path="res://assets/map_icons.png" id="1_o3utf"]
+[ext_resource type="Script" uid="uid://hetqo4unus61" path="res://resources/place_type/place_type.gd" id="2_utf1g"]
+[ext_resource type="PackedScene" uid="uid://um1nlfot8tm0" path="res://scenes/route/phases/droplet/droplet_phase.tscn" id="2_wb6cd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exnwf"]
+atlas = ExtResource("1_o3utf")
+region = Rect2(8, 0, 8, 8)
+
+[resource]
+script = ExtResource("2_utf1g")
+icon = SubResource("AtlasTexture_exnwf")
+scene = ExtResource("2_wb6cd")
+metadata/_custom_type_script = "uid://hetqo4unus61"
