@@ -2,11 +2,10 @@ extends PathFollower
 
 const SUN_POINT := Vector2(96.0, 16.0)
 
-@export var extents: float
+var extents: float
 var polygon: PackedVector2Array
 
 @onready var shade: Polygon2D = $Shade
-@onready var body: AnimatableBody2D = $Body
 
 
 func _ready() -> void:
@@ -25,7 +24,6 @@ func _physics_process(delta: float) -> void:
 	_move_side(0, 3)
 	_move_side(1, 2)
 	shade.polygon = polygon
-	body.global_position = body.global_position
 
 
 func _move_side(top_idx: int, bottom_idx: int) -> void:

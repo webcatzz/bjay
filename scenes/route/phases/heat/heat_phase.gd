@@ -38,7 +38,6 @@ func is_in_shade(node: Node2D) -> bool:
 
 
 func _physics_process(delta: float) -> void:
-	route.player.mix_modulate("shade", Color.WEB_GRAY if is_in_shade(route.player) else Color.WHITE)
 	for bullet: Node in get_tree().get_nodes_in_group("disable_in_shade"):
 		var disabled: bool = is_in_shade(bullet)
 		bullet.modulate.a = 0.5 if disabled else 1.0

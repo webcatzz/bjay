@@ -28,7 +28,7 @@ func _set_health(value: int) -> void:
 	health = value
 	health_changed.emit()
 	if health <= 0:
-		get_tree().change_scene_to_file.call_deferred("res://scenes/game_over.tscn")
+		get_tree().change_scene_to_file.call_deferred("res://scenes/ui/game_over.tscn")
 
 
 # place

@@ -1,24 +1,29 @@
 extends CharacterBody2D
 
-const DASH_TIME: float = 1.0
+enum State {MOVE, DASH_WINDUP, DASH}
+
 const MAX_HEAT: float = 5.0
 
 var input: Vector2
 var direction: Vector2
 var speed: float = 200.0
 
+var state: State : set = _set_state
+var is_invincible: bool
+var dash_held_time: float : set = _set_dash_held_time
+
 var _modulates: Dictionary[String, Color]
 
 @onready var sprite: Node2D = $Sprite
 @onready var animator: AnimationPlayer = $Animator
-@onready var heat_particles: GPUParticles2D = $HeatParticles
+@onready var dash_bar: TextureProgressBar = $DashBar
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 
 
 # damage
 
 func take_damage(amount: int = 1) -> void:
-	if invincibility_timer.is_stopped():
+	if not is_invincible:
 		Game.health -= amount
 		animator.play(&"hurt")
 		if Game.inventory.size():
@@ -28,6 +33,7 @@ func take_damage(amount: int = 1) -> void:
 
 
 func set_invincible(value: bool) -> void:
+	is_invincible = value
 	mix_modulate("invincible", Color(Color.WHITE, 0.5) if value else Color.WHITE)
 
 
@@ -48,12 +54,50 @@ func parachute_item() -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	input = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
+	if event.is_action_pressed(&"dash"):
+		state = State.DASH_WINDUP
+	elif event.is_action_released(&"dash"):
+		if dash_bar.value == dash_bar.max_value:
+			dash()
+		else:
+			state = State.MOVE
+		dash_held_time = 0.0
 
 
 func _physics_process(delta: float) -> void:
-	direction = direction.lerp(input, 6.0 * delta)
+	match state:
+		State.MOVE:
+			direction = direction.lerp(input, 6.0 * delta)
+		State.DASH_WINDUP:
+			dash_held_time += delta
+			direction = direction.lerp(Vector2.ZERO, 6.0 * delta)
 	velocity = direction * speed
 	move_and_slide()
+
+
+func _set_state(value: State) -> void:
+	state = value
+	match state:
+		State.MOVE:
+			$Sprite/Tail.speed_scale = 1.0
+		State.DASH_WINDUP, State.DASH:
+			$Sprite/Tail.speed_scale = 4.0
+
+
+func _set_dash_held_time(value: float) -> void:
+	dash_held_time = value
+	dash_bar.value = value
+	dash_bar.visible = value > 0.0
+
+
+func dash() -> void:
+	state = State.DASH
+	set_invincible(true)
+	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, ^"position", position + input * 100.0, 0.5)
+	await tween.finished
+	set_invincible(false)
+	state = State.MOVE
 
 
 # modulate
