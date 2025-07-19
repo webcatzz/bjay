@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnetujr7sq5rn"]
+
+[ext_resource type="Texture2D" uid="uid://cue0invlq64k4" path="res://assets/bird.png" id="1_vvhwd"]
+[ext_resource type="PackedScene" uid="uid://ds5fphucp3sqr" path="res://scenes/route/parts/hitbox.tscn" id="2_lc23i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc23i"]
+atlas = ExtResource("1_vvhwd")
+region = Rect2(0, 0, 16, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6d3hk"]
+atlas = ExtResource("1_vvhwd")
+region = Rect2(16, 0, 16, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ql54n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lc23i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6d3hk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lc23i"]
+radius = 4.0
+
+[node name="Bird" type="Node2D"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ql54n")
+autoplay = "default"
+frame_progress = 0.141027
+offset = Vector2(0, 0.5)
+
+[node name="Hitbox" parent="." instance=ExtResource("2_lc23i")]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_lc23i")

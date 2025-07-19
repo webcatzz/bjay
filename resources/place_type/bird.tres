@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlaceType" load_steps=5 format=3 uid="uid://cl2arihj6xq32"]
+
+[ext_resource type="Script" uid="uid://hetqo4unus61" path="res://resources/place_type/place_type.gd" id="1_fm8vx"]
+[ext_resource type="Texture2D" uid="uid://dd4oljy8xd4fm" path="res://assets/map_icons.png" id="1_kfuv6"]
+[ext_resource type="PackedScene" uid="uid://dy1rv5pe40t0t" path="res://scenes/route/phases/bird/bird_phase.tscn" id="2_kfuv6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exnwf"]
+atlas = ExtResource("1_kfuv6")
+region = Rect2(40, 0, 8, 8)
+
+[resource]
+script = ExtResource("1_fm8vx")
+icon = SubResource("AtlasTexture_exnwf")
+scene = ExtResource("2_kfuv6")
+metadata/_custom_type_script = "uid://hetqo4unus61"

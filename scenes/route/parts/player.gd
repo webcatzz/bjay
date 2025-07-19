@@ -65,7 +65,7 @@ func dash() -> void:
 	state = State.DASH
 	set_invincible(true)
 	
-	var motion: Vector2 = (input if input else Vector2.RIGHT) * 100.
+	var motion: Vector2 = (input if input else Vector2.RIGHT) * 100.0
 	var params := PhysicsShapeQueryParameters2D.new()
 	params.collision_mask = 0b10
 	params.shape = $Collision.shape
@@ -110,7 +110,7 @@ func parachute_item() -> void:
 	tween.tween_property(node, ^"scale", Vector2.ONE, 0.25).from(Vector2.ZERO)
 	tween.tween_property(node, ^"position:y", Route.RECT.position.y, 0.5)
 	await tween.finished
-	node.position.x = Route.randf_along(0)
+	node.position.x = Route.randf_along(0, -16.0)
 	Route.guide(node, preload("res://assets/parachute_path.tres"), 32.0)
 
 
