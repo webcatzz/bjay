@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5vtiimxjcmfe"]
+
+[ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="1_8547y"]
+[ext_resource type="PackedScene" uid="uid://ds5fphucp3sqr" path="res://scenes/route/parts/hitbox.tscn" id="1_vuv32"]
+[ext_resource type="Texture2D" uid="uid://bkx5b53lqjbtn" path="res://assets/arrow.png" id="2_8547y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vuv32"]
+resource_local_to_scene = true
+radius = 3.0
+
+[node name="Bullet" type="Node2D" groups=["disable_in_shade"]]
+material = ExtResource("1_8547y")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = ExtResource("1_8547y")
+texture = ExtResource("2_8547y")
+
+[node name="Hitbox" parent="." instance=ExtResource("1_vuv32")]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_vuv32")
+
+[connection signal="body_entered" from="Hitbox" to="." method="queue_free" unbinds=1]

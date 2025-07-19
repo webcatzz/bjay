@@ -15,6 +15,7 @@ var phase: Phase
 
 
 func _ready() -> void:
+	await get_tree().create_timer(0.5).timeout
 	phase = first_phase.instantiate()
 	add_child(phase)
 	wipe_out()
@@ -75,11 +76,15 @@ static func edge(angle: float, origin: Vector2 = RECT.get_center()) -> Vector2:
 
 # paths
 
-static func guide(node: Node2D, curve: Curve2D, speed: float) -> void:
+static func guide(node: Node2D, curve: Curve2D, speed: float, rotate: bool = false) -> void:
 	var tween := node.create_tween()
-	tween.tween_method(sample_path.bind(node, curve), 0.0, curve.get_baked_length(), curve.get_baked_length() / speed)
+	tween.tween_method((sample_path_transform if rotate else sample_path_position).bind(node, curve), 0.0, curve.get_baked_length(), curve.get_baked_length() / speed)
 	tween.tween_callback(node.queue_free)
 
 
-static func sample_path(at: float, node: Node2D, curve: Curve2D) -> void:
+static func sample_path_position(at: float, node: Node2D, curve: Curve2D) -> void:
 	node.position = curve.sample_baked(at)
+
+
+static func sample_path_transform(at: float, node: Node2D, curve: Curve2D) -> void:
+	node.transform = curve.sample_baked_with_rotation(at)

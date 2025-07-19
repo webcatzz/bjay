@@ -3,7 +3,7 @@ extends Node
 const PLACE_WEIGHTS: Dictionary[String, float] = {
 	droplet = 1.0,
 	heat = 1.0,
-	glass = 0.5,
+	glass = 0.75,
 	lightning = 0.25,
 }
 

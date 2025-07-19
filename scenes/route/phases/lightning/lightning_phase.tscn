@@ -10,6 +10,7 @@ point_count = 2
 
 [node name="Lightning" type="Node"]
 script = ExtResource("1_5axkt")
+wipe_color = Color(0.0980392, 0.0117647, 0.133333, 1)
 metadata/_custom_type_script = "uid://cya5l21i60qn2"
 
 [node name="Background" type="ColorRect" parent="."]

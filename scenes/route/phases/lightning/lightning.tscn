@@ -110,7 +110,6 @@ _data = {
 
 [node name="Lightning" type="Node2D"]
 script = ExtResource("1_q4uxp")
-metadata/_custom_type_script = "uid://b7f7bxwscbygq"
 
 [node name="Line" type="Line2D" parent="."]
 material = ExtResource("2_86b0u")

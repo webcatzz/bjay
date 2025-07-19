@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbnxwloed52q1"]
+
+[ext_resource type="Script" uid="uid://cae55t4uyxmnp" path="res://scenes/route/parts/bullet.gd" id="1_funov"]
+[ext_resource type="PackedScene" uid="uid://ds5fphucp3sqr" path="res://scenes/route/parts/hitbox.tscn" id="1_vuv32"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vuv32"]
+resource_local_to_scene = true
+radius = 4.0
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_funov")
+
+[node name="Hitbox" parent="." instance=ExtResource("1_vuv32")]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_vuv32")

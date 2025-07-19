@@ -16,6 +16,7 @@ point_count = 2
 
 [node name="DropletPhase" type="Node"]
 script = ExtResource("1_n5nx5")
+wipe_color = Color(0.627451, 0.8, 0.713726, 1)
 metadata/_custom_type_script = "uid://cya5l21i60qn2"
 
 [node name="Background" type="ColorRect" parent="."]

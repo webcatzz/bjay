@@ -20,7 +20,7 @@ normal = Vector2(-1, 0)
 script = ExtResource("1_msb17")
 
 [node name="Wipe" parent="." instance=ExtResource("4_ex5p1")]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.356863, 0.305882, 0.8, 1)
 z_index = 99
 
 [node name="RouteStart" parent="." instance=ExtResource("4_1gebr")]
@@ -46,4 +46,5 @@ position = Vector2(192, 144)
 shape = SubResource("WorldBoundaryShape2D_ex5p1")
 
 [node name="Player" parent="." instance=ExtResource("2_enbfm")]
+z_index = 99
 position = Vector2(96, 108)

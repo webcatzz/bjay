@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5pqfqgqb64eg"
-path="res://.godot/imported/checker.png-7dcf8ccb90954474f03b6153c771f4ea.ctex"
+uid="uid://bkx5b53lqjbtn"
+path="res://.godot/imported/arrow.png-af9c40b335090227900bc7e5c1ee343c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/checker.png"
-dest_files=["res://.godot/imported/checker.png-7dcf8ccb90954474f03b6153c771f4ea.ctex"]
+source_file="res://assets/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-af9c40b335090227900bc7e5c1ee343c.ctex"]
 
 [params]
 

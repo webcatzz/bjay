@@ -1,12 +1,11 @@
 extends CharacterBody2D
 
+const DASH_TIME: float = 1.0
 const MAX_HEAT: float = 5.0
 
 var input: Vector2
 var direction: Vector2
 var speed: float = 200.0
-
-var heat: float : set = _set_heat
 
 var _modulates: Dictionary[String, Color]
 
@@ -45,15 +44,6 @@ func parachute_item() -> void:
 	Route.guide.call_deferred(node, curve, 32.0)
 
 
-func _set_heat(value: float) -> void:
-	if value > heat:
-		heat_particles.restart()
-		if value >= MAX_HEAT:
-			take_damage()
-	heat = clampf(value, 0.0, MAX_HEAT)
-	mix_modulate("heat", Color.WHITE.lerp(Palette.RED, heat / MAX_HEAT))
-
-
 # movement
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -63,7 +53,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	direction = direction.lerp(input, 6.0 * delta)
 	velocity = direction * speed
-	heat -= delta
 	move_and_slide()
 
 

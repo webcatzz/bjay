@@ -76,7 +76,7 @@ func populate_clouds() -> void:
 	for i: int in 16:
 		var node := preload("res://scenes/route/parts/loop_cloud.tscn").instantiate()
 		node.modulate = Color("#a0ccb6")
-		node.radius = randi_range(16.0, 32.0)
+		node.radius = randf_range(16.0, 32.0)
 		node.speed = 64.0
 		node.z_index = 1
 		path_top.add_child(node)
@@ -85,7 +85,7 @@ func populate_clouds() -> void:
 	for i: int in 16:
 		var node := preload("res://scenes/route/parts/loop_cloud.tscn").instantiate()
 		node.modulate = Color("#92bbaf")
-		node.radius = randi_range(12.0, 24.0)
+		node.radius = randf_range(12.0, 24.0)
 		node.speed = 32.0
 		node.v_offset = 24.0
 		node.z_index = -1
@@ -95,7 +95,7 @@ func populate_clouds() -> void:
 	for i: int in 16:
 		var node := preload("res://scenes/route/parts/loop_cloud.tscn").instantiate()
 		node.modulate = Color("#92bbaf")
-		node.radius = randi_range(12.0, 24.0)
+		node.radius = randf_range(12.0, 24.0)
 		node.speed = 32.0
 		node.z_index = -1
 		path_bottom.add_child(node)
