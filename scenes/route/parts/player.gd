@@ -64,9 +64,18 @@ func _set_dash_held_time(value: float) -> void:
 func dash() -> void:
 	state = State.DASH
 	set_invincible(true)
+	
+	var motion: Vector2 = (input if input else Vector2.RIGHT) * 100.
+	var params := PhysicsShapeQueryParameters2D.new()
+	params.collision_mask = 0b10
+	params.shape = $Collision.shape
+	params.transform = transform
+	params.motion = motion
+	motion *= get_viewport().world_2d.direct_space_state.cast_motion(params)[0]
 	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, ^"position", position + input * 100.0, 0.5)
+	tween.tween_property(self, ^"position", position + motion, 0.5)
 	await tween.finished
+	
 	set_invincible(false)
 	state = State.MOVE
 
