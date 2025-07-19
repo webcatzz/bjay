@@ -17,37 +17,8 @@ var _modulates: Dictionary[String, Color]
 @onready var sprite: Node2D = $Sprite
 @onready var animator: AnimationPlayer = $Animator
 @onready var dash_bar: TextureProgressBar = $DashBar
+@onready var hurt_particles: GPUParticles2D = $HurtParticles
 @onready var invincibility_timer: Timer = $InvincibilityTimer
-
-
-# damage
-
-func take_damage(amount: int = 1) -> void:
-	if not is_invincible:
-		Game.health -= amount
-		animator.play(&"hurt")
-		if Game.inventory.size():
-			parachute_item()
-		set_invincible(true)
-		invincibility_timer.start()
-
-
-func set_invincible(value: bool) -> void:
-	is_invincible = value
-	mix_modulate("invincible", Color(Color.WHITE, 0.5) if value else Color.WHITE)
-
-
-func parachute_item() -> void:
-	var idx: int = randi_range(0, Game.inventory.size() - 1)
-	var item: Item = Game.inventory[idx]
-	Game.remove_item(idx)
-	var node := preload("res://scenes/route/parts/item_parachute.tscn").instantiate()
-	node.item = item
-	var curve := Curve2D.new()
-	curve.add_point(position, Vector2.ZERO, Vector2(0.0, -32.0))
-	curve.add_point(Vector2(position.x + randf_range(-64.0, 64.0), Route.RECT.end.y + 6.0))
-	get_parent().add_child.call_deferred(node)
-	Route.guide.call_deferred(node, curve, 32.0)
 
 
 # movement
@@ -98,6 +69,40 @@ func dash() -> void:
 	await tween.finished
 	set_invincible(false)
 	state = State.MOVE
+
+
+# damage
+
+func take_damage(amount: int = 1) -> void:
+	if not is_invincible:
+		Game.health -= amount
+		animator.play(&"hurt")
+		if Game.inventory.size():
+			parachute_item()
+		set_invincible(true)
+		invincibility_timer.start()
+
+
+func set_invincible(value: bool) -> void:
+	is_invincible = value
+	mix_modulate("invincible", Color(Color.WHITE, 0.5) if value else Color.WHITE)
+
+
+func parachute_item() -> void:
+	var idx: int = randi_range(0, Game.inventory.size() - 1)
+	var item: Item = Game.inventory[idx]
+	Game.remove_item(idx)
+	await get_tree().process_frame
+	var node := preload("res://scenes/route/parts/item_parachute.tscn").instantiate()
+	node.item = item
+	node.position = position
+	get_parent().add_child(node)
+	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_parallel()
+	tween.tween_property(node, ^"scale", Vector2.ONE, 0.25).from(Vector2.ZERO)
+	tween.tween_property(node, ^"position:y", Route.RECT.position.y, 0.5)
+	await tween.finished
+	node.position.x = Route.randf_along(0)
+	Route.guide(node, preload("res://assets/parachute_path.tres"), 32.0)
 
 
 # modulate

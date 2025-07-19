@@ -40,7 +40,7 @@ func is_in_shade(node: Node2D) -> bool:
 func _physics_process(delta: float) -> void:
 	for bullet: Node in get_tree().get_nodes_in_group("disable_in_shade"):
 		var disabled: bool = is_in_shade(bullet)
-		bullet.modulate.a = 0.5 if disabled else 1.0
+		bullet.modulate = Color("#ff3300", 0.5) if disabled else Color.WHITE
 		bullet.process_mode = Node.PROCESS_MODE_DISABLED if disabled else Node.PROCESS_MODE_INHERIT
 
 
