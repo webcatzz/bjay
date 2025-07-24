@@ -29,13 +29,16 @@ func generate() -> void:
 			var next_place: Place = _get_place(coords)
 			prev_place.link(next_place)
 		_grid[coords].link(destination)
+	# place type
+	for place: Place in _grid.values():
+		place.type = load("res://resources/place_type/%s.tres" % PLACE_WEIGHTS.keys()[_rng.rand_weighted(PLACE_WEIGHTS.values())])
 
 
 func places() -> Array[Place]:
 	return _grid.values()
 
 
-# places
+# paths
 
 func _add_place(place: Place, coords: Vector2i) -> void:
 	place.coords = coords
@@ -43,17 +46,10 @@ func _add_place(place: Place, coords: Vector2i) -> void:
 
 
 func _get_place(coords: Vector2i) -> Place:
-	if not coords in _grid: _add_place(_generate_place(), coords)
+	if not coords in _grid:
+		_add_place(Place.new(), coords)
 	return _grid[coords]
 
-
-func _generate_place() -> Place:
-	var place := Place.new()
-	place.type = load("res://resources/place_type/%s.tres" % PLACE_WEIGHTS.keys()[_rng.rand_weighted(PLACE_WEIGHTS.values())])
-	return place
-
-
-# branches
 
 func _branch(coords: Vector2i) -> Vector2i:
 	var branches: PackedInt32Array = [0]

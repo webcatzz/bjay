@@ -1,6 +1,6 @@
 class_name Place
 
-var type: PlaceType = preload("res://resources/place_type/default.tres")
+var type: PlaceType
 var coords: Vector2i
 var next_places: Array[Place]
 

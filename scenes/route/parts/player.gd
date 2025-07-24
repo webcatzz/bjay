@@ -32,7 +32,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			dash()
 		else:
 			state = State.MOVE
-		dash_held_time = 0.0
 
 
 func _physics_process(delta: float) -> void:
@@ -51,7 +50,8 @@ func _set_state(value: State) -> void:
 	match state:
 		State.MOVE:
 			$Sprite/Tail.speed_scale = 1.0
-		State.DASH_WINDUP, State.DASH:
+		State.DASH_WINDUP:
+			dash_held_time = 0.0
 			$Sprite/Tail.speed_scale = 4.0
 
 
@@ -85,9 +85,13 @@ func dash() -> void:
 func take_damage(amount: int = 1) -> void:
 	if not is_invincible:
 		Game.health -= amount
+		$HitstopTimer.start()
+		get_tree().paused = true
+		
 		animator.play(&"hurt")
 		if Game.inventory.size():
 			parachute_item()
+		
 		set_invincible(true)
 		invincibility_timer.start()
 
@@ -112,6 +116,11 @@ func parachute_item() -> void:
 	await tween.finished
 	node.position.x = Route.randf_along(0, -16.0)
 	Route.guide(node, preload("res://assets/parachute_path.tres"), 32.0)
+
+
+func _on_hitstop_ended() -> void:
+	get_tree().paused = false
+	input = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 
 
 # modulate

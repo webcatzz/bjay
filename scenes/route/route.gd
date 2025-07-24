@@ -15,8 +15,8 @@ var phase: Phase
 
 
 func _ready() -> void:
-	await get_tree().create_timer(0.5).timeout
 	phase = first_phase.instantiate()
+	await get_tree().create_timer(0.5).timeout
 	add_child(phase)
 	wipe_out()
 

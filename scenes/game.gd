@@ -7,7 +7,9 @@ var inventory: Array[Item]
 var health: int = 100000000000 : set = _set_health
 var place: Place : set = _set_place
 
-var babble_friendship: int
+var data: Dictionary[String, Variant]
+
+@onready var music: AudioStreamPlayer = $Music
 
 
 # inventory
@@ -39,6 +41,13 @@ func _set_place(value: Place) -> void:
 		Map.origin = Map.destination
 		Map.destination = Place.new()
 		Map.generate()
+
+
+# music
+
+func play_music(stream: AudioStream) -> void:
+	music.stream = stream
+	music.play()
 
 
 # pausing

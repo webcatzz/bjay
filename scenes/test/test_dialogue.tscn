@@ -5,6 +5,7 @@
 
 [node name="TestDialogue" type="Node"]
 script = ExtResource("1_0qhje")
-file = "res://resources/dialogue/place_info.dialogue"
+file = "res://resources/dialogue/photos.dlg"
+key = "glass"
 
 [node name="DialogueDisplay" parent="." instance=ExtResource("1_ww2k5")]

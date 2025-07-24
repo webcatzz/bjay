@@ -1,6 +1,6 @@
 extends Node
 
-@export_file("*.dialogue") var file: String
+@export_file("*.dlg") var file: String
 @export var key: String
 
 func _ready() -> void:
