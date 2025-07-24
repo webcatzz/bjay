@@ -32,6 +32,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			dash()
 		else:
 			state = State.MOVE
+		dash_held_time = 0.0
 
 
 func _physics_process(delta: float) -> void:
