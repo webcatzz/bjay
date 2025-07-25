@@ -7,39 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://c3uswi25ahtcx" path="res://assets/dash_bar_frame.png" id="4_88tof"]
 [ext_resource type="Texture2D" uid="uid://e3enk75iqksm" path="res://assets/dash_bar_fill.png" id="5_1uxg6"]
 
-[sub_resource type="Gradient" id="Gradient_1uxg6"]
-offsets = PackedFloat32Array(0.75, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-metadata/_snap_enabled = true
-metadata/_snap_count = 4
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ho2n"]
-gradient = SubResource("Gradient_1uxg6")
-width = 24
-height = 24
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
-metadata/_snap_enabled = true
-
-[sub_resource type="Curve" id="Curve_4ho2n"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-metadata/_snap_enabled = true
-
-[sub_resource type="CurveTexture" id="CurveTexture_i6i3n"]
-curve = SubResource("Curve_4ho2n")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m0uxo"]
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-spread = 10.0
-initial_velocity_min = 16.0
-initial_velocity_max = 32.0
-gravity = Vector3(-64, 0, 0)
-scale_min = 0.5
-alpha_curve = SubResource("CurveTexture_i6i3n")
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hui5"]
 atlas = ExtResource("1_rjpy8")
 region = Rect2(0, 22, 12, 18)
@@ -94,14 +61,48 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_d610k"]
+
+[sub_resource type="Gradient" id="Gradient_1uxg6"]
+offsets = PackedFloat32Array(0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 4
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ho2n"]
+gradient = SubResource("Gradient_1uxg6")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_4ho2n"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_i6i3n"]
+curve = SubResource("Curve_4ho2n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m0uxo"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 16.0
+initial_velocity_max = 32.0
+gravity = Vector3(-64, 0, 0)
+scale_min = 0.5
+color = Color(0.433594, 0.433594, 0.433594, 1)
+alpha_curve = SubResource("CurveTexture_i6i3n")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4jgpm"]
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
 initial_velocity_min = 64.0
 initial_velocity_max = 64.0
 gravity = Vector3(0, 98, 0)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d610k"]
 
 [sub_resource type="Curve" id="Curve_1uxg6"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -247,13 +248,6 @@ _data = {
 collision_mask = 3
 script = ExtResource("1_hh32o")
 
-[node name="LowHealthParticles" type="GPUParticles2D" parent="."]
-material = ExtResource("3_1hui5")
-emitting = false
-amount = 3
-texture = SubResource("GradientTexture2D_4ho2n")
-process_material = SubResource("ParticleProcessMaterial_m0uxo")
-
 [node name="Sprite" type="Node2D" parent="."]
 material = ExtResource("3_1hui5")
 
@@ -278,6 +272,17 @@ autoplay = "default"
 frame_progress = 0.193719
 offset = Vector2(17, 0.5)
 
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d610k")
+
+[node name="LowHealthParticles" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+material = ExtResource("3_1hui5")
+emitting = false
+amount = 3
+texture = SubResource("GradientTexture2D_4ho2n")
+process_material = SubResource("ParticleProcessMaterial_m0uxo")
+
 [node name="HurtParticles" type="GPUParticles2D" parent="."]
 process_mode = 3
 emitting = false
@@ -286,9 +291,6 @@ texture = ExtResource("3_4ho2n")
 one_shot = true
 explosiveness = 0.9
 process_material = SubResource("ParticleProcessMaterial_4jgpm")
-
-[node name="Collision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_d610k")
 
 [node name="DashBar" type="TextureProgressBar" parent="."]
 visible = false
@@ -316,28 +318,6 @@ process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_88tof")
 }
-
-[node name="UI" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="HealthBar" type="ProgressBar" parent="UI"]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 60.0
-offset_bottom = 14.0
-step = 1.0
-value = 100.0
-
-[node name="MailCount" type="Label" parent="UI"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -25.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = 12.0
-grow_horizontal = 0
-text = "0 mail"
 
 [node name="HitstopTimer" type="Timer" parent="."]
 process_mode = 3

@@ -39,7 +39,6 @@ func wipe_in() -> void:
 	player.z_index = wipe.z_index
 	wipe.modulate = phase.wipe_color
 	await wipe.wipe_in()
-	player.clear_modulate()
 
 
 func wipe_out() -> void:

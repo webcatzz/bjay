@@ -11,13 +11,11 @@ var speed: float = 200.0
 var state: State : set = _set_state
 var is_invincible: bool
 var dash_held_time: float : set = _set_dash_held_time
-
-var _modulates: Dictionary[String, Color]
+var dash_query_params := PhysicsShapeQueryParameters2D.new()
 
 @onready var sprite: Node2D = $Sprite
 @onready var animator: AnimationPlayer = $Animator
 @onready var dash_bar: TextureProgressBar = $DashBar
-@onready var hurt_particles: GPUParticles2D = $HurtParticles
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 
 
@@ -67,12 +65,9 @@ func dash() -> void:
 	set_invincible(true)
 	
 	var motion: Vector2 = (input if input else Vector2.RIGHT) * 100.0
-	var params := PhysicsShapeQueryParameters2D.new()
-	params.collision_mask = 0b10
-	params.shape = $Collision.shape
-	params.transform = transform
-	params.motion = motion
-	motion *= get_viewport().world_2d.direct_space_state.cast_motion(params)[0]
+	dash_query_params.transform = transform
+	dash_query_params.motion = motion
+	motion *= get_viewport().world_2d.direct_space_state.cast_motion(dash_query_params)[0]
 	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, ^"position", position + motion, 0.5)
 	await tween.finished
@@ -90,7 +85,7 @@ func take_damage(amount: int = 1) -> void:
 		get_tree().paused = true
 		
 		animator.play(&"hurt")
-		if Game.inventory.size():
+		if not Game.inventory.is_empty():
 			parachute_item()
 		
 		set_invincible(true)
@@ -99,7 +94,7 @@ func take_damage(amount: int = 1) -> void:
 
 func set_invincible(value: bool) -> void:
 	is_invincible = value
-	mix_modulate("invincible", Color(Color.WHITE, 0.5) if value else Color.WHITE)
+	sprite.modulate = Color(Color.WHITE, 0.5) if value else Color.WHITE
 
 
 func parachute_item() -> void:
@@ -124,34 +119,8 @@ func _on_hitstop_ended() -> void:
 	input = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 
 
-# modulate
-
-func mix_modulate(key: String, value: Color = Color.WHITE) -> void:
-	_modulates[key] = value
-	sprite.modulate = _modulates.values().reduce(_mix_colors)
-
-
-func clear_modulate() -> void:
-	_modulates.clear()
-	sprite.modulate = Color.WHITE
-
-
-func _mix_colors(a: Color, b: Color) -> Color:
-	return a.lerp(b, 0.5)
-
-
-# ui
+# init
 
 func _ready() -> void:
-	_on_inventory_changed()
-	_on_health_changed()
-	Game.inventory_changed.connect(_on_inventory_changed)
-	Game.health_changed.connect(_on_health_changed)
-
-
-func _on_inventory_changed() -> void:
-	$UI/MailCount.text = str(Game.inventory.size()) + " mail"
-
-
-func _on_health_changed() -> void:
-	$UI/HealthBar.value = Game.health
+	dash_query_params.collision_mask = 0b10
+	dash_query_params.shape = $Collision.shape
