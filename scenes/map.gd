@@ -19,6 +19,7 @@ var _rng := RandomNumberGenerator.new()
 func generate() -> void:
 	Game.place = origin
 	_grid.clear()
+	# paths
 	_add_place(origin, Vector2i(-1, size.y / 2))
 	_add_place(destination, Vector2i(size.x, size.y / 2))
 	for i: int in 3:
@@ -29,9 +30,17 @@ func generate() -> void:
 			var next_place: Place = _get_place(coords)
 			prev_place.link(next_place)
 		_grid[coords].link(destination)
-	# place type
-	for place: Place in _grid.values():
-		place.type = load("res://resources/place_type/%s.tres" % PLACE_WEIGHTS.keys()[_rng.rand_weighted(PLACE_WEIGHTS.values())])
+	# place types
+	for x: int in size.x:
+		for y: int in size.y:
+			var place: Place = _grid.get(Vector2i(x, y))
+			if place:
+				var weights: Dictionary[String, float] = PLACE_WEIGHTS.duplicate()
+				for prev_y: int in size.y:
+					var prev_place: Place = _grid.get(Vector2i(place.coords.x - 1, prev_y))
+					if prev_place and place in prev_place.next_places:
+						weights.erase(prev_place.type.resource_path.get_file().get_slice(".", 0))
+				place.type = load("res://resources/place_type/%s.tres" % weights.keys()[_rng.rand_weighted(weights.values())])
 
 
 func places() -> Array[Place]:
