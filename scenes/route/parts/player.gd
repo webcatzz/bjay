@@ -30,7 +30,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			dash()
 		else:
 			state = State.MOVE
-		dash_held_time = 0.0
 
 
 func _physics_process(delta: float) -> void:
@@ -45,10 +44,12 @@ func _physics_process(delta: float) -> void:
 
 
 func _set_state(value: State) -> void:
+	match state:
+		State.DASH_WINDUP:
+			dash_held_time = 0.0
+			$Sprite/Tail.speed_scale = 1.0
 	state = value
 	match state:
-		State.MOVE:
-			$Sprite/Tail.speed_scale = 1.0
 		State.DASH_WINDUP:
 			dash_held_time = 0.0
 			$Sprite/Tail.speed_scale = 4.0
@@ -81,6 +82,8 @@ func dash() -> void:
 func take_damage(amount: int = 1) -> void:
 	if not is_invincible:
 		Game.health -= amount
+		state = State.MOVE
+		
 		$HitstopTimer.start()
 		get_tree().paused = true
 		
@@ -101,6 +104,7 @@ func parachute_item() -> void:
 	var idx: int = randi_range(0, Game.inventory.size() - 1)
 	var item: Item = Game.inventory[idx]
 	Game.remove_item(idx)
+	
 	await get_tree().process_frame
 	var node := preload("res://scenes/route/parts/item_parachute.tscn").instantiate()
 	node.item = item
