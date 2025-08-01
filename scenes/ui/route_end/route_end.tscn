@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://xk5g81xfxyw5"]
 
-[ext_resource type="Script" uid="uid://bhc13h2evbp83" path="res://scenes/route/phases/destination/destination.gd" id="1_jma8q"]
-[ext_resource type="Script" uid="uid://cyo3asylv35ax" path="res://scenes/route/parts/packages.gd" id="2_kv55n"]
+[ext_resource type="Script" uid="uid://bhc13h2evbp83" path="res://scenes/ui/route_end/route_end.gd" id="1_3728a"]
+[ext_resource type="Script" uid="uid://cyo3asylv35ax" path="res://scenes/route/parts/packages.gd" id="2_vdxtl"]
 
-[node name="Destination" type="Node"]
-script = ExtResource("1_jma8q")
-wipe_color = Color(0, 0, 0, 1)
+[node name="RouteEnd" type="Node"]
+script = ExtResource("1_3728a")
 metadata/_custom_type_script = "uid://cya5l21i60qn2"
 
 [node name="Background" type="ColorRect" parent="."]
@@ -31,5 +30,5 @@ offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_kv55n")
+script = ExtResource("2_vdxtl")
 spacing = Vector2(0, -6)

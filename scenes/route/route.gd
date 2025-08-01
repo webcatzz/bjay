@@ -15,6 +15,13 @@ var phase: Phase
 
 
 func _ready() -> void:
+	Map.generate()
+	for i: int in 5:
+		var item := Item.new()
+		item.type = preload("res://resources/item_type/package.tres")
+		item.destination = Map.destination
+		Game.add_item(item)
+	
 	phase = first_phase.instantiate()
 	await get_tree().create_timer(0.5).timeout
 	add_child(phase)

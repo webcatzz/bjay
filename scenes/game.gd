@@ -43,6 +43,8 @@ func _set_health(value: int) -> void:
 func _set_place(value: Place) -> void:
 	place = value
 	place_changed.emit()
+	if place == Map.destination:
+		get_tree().change_scene_to_file("res://scenes/ui/route_end/route_end.tscn")
 
 
 # music
@@ -58,12 +60,3 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"pause"):
 		get_tree().paused = !get_tree().paused
 		$Pause.visible = get_tree().paused
-
-
-# init
-
-func _ready() -> void:
-	for i: int in 5:
-		var item := Item.new()
-		item.type = preload("res://resources/item_type/package.tres")
-		add_item(item)

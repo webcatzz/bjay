@@ -1,4 +1,4 @@
 class_name Item
 
 var type: ItemType
-var address: String
+var destination: Place
