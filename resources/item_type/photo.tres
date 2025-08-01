@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="ItemType" load_steps=3 format=3 uid="uid://dtpionf2pffg2"]
+[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://dtpionf2pffg2"]
 
 [ext_resource type="Script" uid="uid://56bykvnxg2ag" path="res://resources/item_type/item_type.gd" id="1_v2mp5"]
-[ext_resource type="Texture2D" uid="uid://yp1acg0fimgh" path="res://assets/photo.png" id="2_v2mp5"]
+[ext_resource type="Texture2D" uid="uid://bxybkfk4ogfwd" path="res://assets/mail_icons.png" id="2_v2mp5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_un0tu"]
+atlas = ExtResource("2_v2mp5")
+region = Rect2(16, 0, 8, 8)
 
 [resource]
 script = ExtResource("1_v2mp5")
 name = "photo"
-texture = ExtResource("2_v2mp5")
+texture = SubResource("AtlasTexture_un0tu")
+description = ""
 metadata/_custom_type_script = "uid://56bykvnxg2ag"

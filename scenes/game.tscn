@@ -1,12 +1,37 @@
 [gd_scene load_steps=3 format=3 uid="uid://dv52kxk5s7v1j"]
 
 [ext_resource type="Script" uid="uid://dqsuayd75s5dt" path="res://scenes/game.gd" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://dpmcsv5ggd3c5" path="res://scenes/ui/pause/pause.tscn" id="2_yqjtg"]
+[ext_resource type="FontVariation" uid="uid://bncotpivm8rm0" path="res://assets/fonts/beetle.tres" id="2_yqjtg"]
 
 [node name="Game" type="Node"]
+process_mode = 3
 script = ExtResource("1_uwrxv")
 
-[node name="Pause" parent="." instance=ExtResource("2_yqjtg")]
+[node name="Pause" type="CanvasLayer" parent="."]
+layer = 2
 visible = false
+
+[node name="Color" type="ColorRect" parent="Pause"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="Label" type="Label" parent="Pause"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.5
+offset_top = -3.0
+offset_right = 17.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_yqjtg")
+text = "(paused...)"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

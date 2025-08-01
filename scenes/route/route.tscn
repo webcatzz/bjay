@@ -47,4 +47,4 @@ shape = SubResource("WorldBoundaryShape2D_ex5p1")
 
 [node name="Player" parent="." instance=ExtResource("2_enbfm")]
 z_index = 99
-position = Vector2(96, 108)
+position = Vector2(96, 100)

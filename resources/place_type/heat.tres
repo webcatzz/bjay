@@ -10,6 +10,7 @@ region = Rect2(24, 0, 8, 8)
 
 [resource]
 script = ExtResource("2_lm3ne")
+name = "sun"
 icon = SubResource("AtlasTexture_exnwf")
 scene = ExtResource("2_vnddn")
 metadata/_custom_type_script = "uid://hetqo4unus61"

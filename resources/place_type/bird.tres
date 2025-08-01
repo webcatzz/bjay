@@ -10,6 +10,7 @@ region = Rect2(40, 0, 8, 8)
 
 [resource]
 script = ExtResource("1_fm8vx")
+name = "bird"
 icon = SubResource("AtlasTexture_exnwf")
 scene = ExtResource("2_kfuv6")
 metadata/_custom_type_script = "uid://hetqo4unus61"

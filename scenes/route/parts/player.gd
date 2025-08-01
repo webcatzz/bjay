@@ -82,17 +82,6 @@ func dash() -> void:
 func take_damage(amount: int = 1) -> void:
 	if not is_invincible:
 		Game.health -= amount
-		state = State.MOVE
-		
-		$HitstopTimer.start()
-		get_tree().paused = true
-		
-		animator.play(&"hurt")
-		if not Game.inventory.is_empty():
-			parachute_item()
-		
-		set_invincible(true)
-		invincibility_timer.start()
 
 
 func set_invincible(value: bool) -> void:
@@ -115,7 +104,12 @@ func parachute_item() -> void:
 	tween.tween_property(node, ^"position:y", Route.RECT.position.y, 0.5)
 	await tween.finished
 	node.position.x = Route.randf_along(0, -16.0)
-	Route.guide(node, preload("res://assets/parachute_path.tres"), 32.0)
+	Route.guide(node, preload("res://assets/paths/wave_down.tres"), 64.0)
+
+
+func hitstop() -> void:
+	get_tree().paused = true
+	$HitstopTimer.start()
 
 
 func _on_hitstop_ended() -> void:
@@ -128,3 +122,39 @@ func _on_hitstop_ended() -> void:
 func _ready() -> void:
 	dash_query_params.collision_mask = 0b10
 	dash_query_params.shape = $Collision.shape
+	_on_inventory_changed()
+	Game.health_changed.connect(_on_health_changed)
+	Game.inventory_changed.connect(_on_inventory_changed)
+	Game.place_changed.connect(_on_place_changed)
+
+
+func _on_health_changed(by: int) -> void:
+	var ratio: float = 1.0 - float(Game.health) / Game.MAX_HEALTH
+	$LowHealthParticles.amount_ratio = ratio
+	$LowHealthParticles.modulate.a = ratio
+	
+	if by < 0:
+		state = State.MOVE
+		animator.play(&"hurt")
+		if not Game.inventory.is_empty():
+			parachute_item()
+		hitstop()
+		set_invincible(true)
+		invincibility_timer.start()
+
+
+func _on_inventory_changed() -> void:
+	$UI/Bottom/Mail/Sprites.display(Game.inventory)
+	$UI/Bottom/Mail/Label.text = "×" + str(Game.inventory.size())
+
+
+func _on_place_changed() -> void:
+	var label: Label = $UI/Bottom/PlaceLabel
+	label.text = Game.place.type.name
+	label.modulate.a = 1.0
+	label.show()
+	var tween := create_tween()
+	tween.tween_property(label, ^"visible_characters", label.text.length(), 0.1 * label.text.length()).from(0)
+	tween.tween_interval(1.0)
+	tween.tween_property(label, ^"modulate:a", 0.0, 0.25)
+	tween.tween_callback(label.hide)

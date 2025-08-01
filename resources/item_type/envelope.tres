@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="ItemType" load_steps=3 format=3 uid="uid://0eqpj0ou51yb"]
+[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://0eqpj0ou51yb"]
 
 [ext_resource type="Script" uid="uid://56bykvnxg2ag" path="res://resources/item_type/item_type.gd" id="1_gmhv0"]
-[ext_resource type="Texture2D" uid="uid://cim60t8srtqbm" path="res://assets/envelope.png" id="2_gmhv0"]
+[ext_resource type="Texture2D" uid="uid://bxybkfk4ogfwd" path="res://assets/mail_icons.png" id="2_gmhv0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5r77"]
+atlas = ExtResource("2_gmhv0")
+region = Rect2(8, 0, 8, 8)
 
 [resource]
 script = ExtResource("1_gmhv0")
 name = "envelope"
-texture = ExtResource("2_gmhv0")
+texture = SubResource("AtlasTexture_h5r77")
+description = ""
 metadata/_custom_type_script = "uid://56bykvnxg2ag"

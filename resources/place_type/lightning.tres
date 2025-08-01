@@ -10,6 +10,7 @@ region = Rect2(16, 0, 8, 8)
 
 [resource]
 script = ExtResource("2_puns2")
+name = "storm"
 icon = SubResource("AtlasTexture_m1168")
 scene = ExtResource("2_00j8a")
 metadata/_custom_type_script = "uid://hetqo4unus61"
