@@ -13,8 +13,9 @@ func display(items: Array[Item]) -> void:
 
 
 func _draw() -> void:
-	custom_minimum_size = spacing * (item_types.size() - 1) + Vector2(8.0, 10.0)
-	var point := Vector2(0.0, 1.0)
+	var length: Vector2 = spacing * maxf(item_types.size() - 1, 0.0)
+	var point: Vector2 = Vector2(1.0, 1.0) - length.minf(0.0)
+	custom_minimum_size = Vector2(10.0, 10.0) + length.abs()
 	for item_type: ItemType in item_types:
-		draw_texture(item_type.texture, point + Vector2(0.0, roundf(sin(point.x * 3.0))))
+		draw_texture(item_type.texture, point + Vector2(sin(point.y * spacing.y * 0.25), sin(point.x * spacing.x * 0.25)).round())
 		point += spacing

@@ -10,6 +10,7 @@ var inventory: Array[Item]
 var health: int = MAX_HEALTH : set = _set_health
 var place: Place : set = _set_place
 
+var delivered_items: Array[Item]
 var data: Dictionary[String, Variant]
 
 @onready var music: AudioStreamPlayer = $Music
@@ -42,10 +43,6 @@ func _set_health(value: int) -> void:
 func _set_place(value: Place) -> void:
 	place = value
 	place_changed.emit()
-	if place == Map.destination:
-		Map.origin = Map.destination
-		Map.destination = Place.new()
-		Map.generate()
 
 
 # music
@@ -66,7 +63,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 # init
 
 func _ready() -> void:
-	for i: int in 20:
+	for i: int in 5:
 		var item := Item.new()
 		item.type = preload("res://resources/item_type/package.tres")
 		add_item(item)

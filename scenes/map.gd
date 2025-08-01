@@ -8,8 +8,8 @@ const PLACE_WEIGHTS: Dictionary[String, float] = {
 	lightning = 0.25,
 }
 
-var origin: Place
-var destination: Place
+var origin := Place.new()
+var destination := Place.new()
 var size: Vector2i
 
 var _grid: Dictionary[Vector2i, Place]
@@ -18,6 +18,7 @@ var _rng := RandomNumberGenerator.new()
 
 func generate() -> void:
 	Game.place = origin
+	origin.next_places.clear()
 	_grid.clear()
 	# paths
 	_add_place(origin, Vector2i(-1, size.y / 2))
@@ -79,7 +80,6 @@ func _is_linked(start_coords: Vector2i, end_coords: Vector2i) -> bool:
 # init
 
 func _ready() -> void:
-	origin = Place.new()
-	destination = Place.new()
-	size = Vector2i(5, 3)
+	destination.type = load("res://resources/place_type/destination.tres")
+	size = Vector2i(0, 3)
 	generate()

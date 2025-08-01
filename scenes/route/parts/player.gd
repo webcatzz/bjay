@@ -117,15 +117,10 @@ func _on_hitstop_ended() -> void:
 	input = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 
 
-# init
+# ui
 
-func _ready() -> void:
-	dash_query_params.collision_mask = 0b10
-	dash_query_params.shape = $Collision.shape
-	_on_inventory_changed()
-	Game.health_changed.connect(_on_health_changed)
-	Game.inventory_changed.connect(_on_inventory_changed)
-	Game.place_changed.connect(_on_place_changed)
+func _on_visibility_changed() -> void:
+	$UI.visible = visible
 
 
 func _on_health_changed(by: int) -> void:
@@ -158,3 +153,14 @@ func _on_place_changed() -> void:
 	tween.tween_interval(1.0)
 	tween.tween_property(label, ^"modulate:a", 0.0, 0.25)
 	tween.tween_callback(label.hide)
+
+
+# init
+
+func _ready() -> void:
+	dash_query_params.collision_mask = 0b10
+	dash_query_params.shape = $Collision.shape
+	_on_inventory_changed()
+	Game.health_changed.connect(_on_health_changed)
+	Game.inventory_changed.connect(_on_inventory_changed)
+	Game.place_changed.connect(_on_place_changed)

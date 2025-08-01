@@ -367,7 +367,7 @@ theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Sprites" type="Control" parent="UI/Bottom/Mail"]
-custom_minimum_size = Vector2(38, 10)
+custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
 script = ExtResource("7_i6i3n")
 item_types = Array[ExtResource("8_ddm3y")]([ExtResource("9_a13su"), ExtResource("9_a13su"), ExtResource("10_l016n"), ExtResource("9_a13su"), ExtResource("11_75kmm"), ExtResource("9_a13su")])
@@ -382,5 +382,6 @@ theme_override_constants/shadow_outline_size = 4
 theme_override_fonts/font = ExtResource("7_a13su")
 text = "×5"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="timeout" from="HitstopTimer" to="." method="_on_hitstop_ended"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="set_invincible" binds= [false]]
