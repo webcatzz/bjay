@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://xk5g81xfxyw5"]
+[gd_scene load_steps=5 format=3 uid="uid://xk5g81xfxyw5"]
 
 [ext_resource type="Script" uid="uid://bhc13h2evbp83" path="res://scenes/ui/route_end/route_end.gd" id="1_3728a"]
 [ext_resource type="Script" uid="uid://cyo3asylv35ax" path="res://scenes/route/parts/packages.gd" id="2_vdxtl"]
+[ext_resource type="AudioStream" uid="uid://chluhykyywsq7" path="res://assets/audio/win.mp3" id="3_vdxtl"]
+[ext_resource type="AudioStream" uid="uid://bcporfu2akxm4" path="res://assets/audio/night.mp3" id="4_buq6c"]
 
 [node name="RouteEnd" type="Node"]
 script = ExtResource("1_3728a")
@@ -32,3 +34,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_vdxtl")
 spacing = Vector2(0, -6)
+
+[node name="Intro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vdxtl")
+autoplay = true
+bus = &"Music"
+
+[node name="Loop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_buq6c")
+bus = &"Music"
+
+[connection signal="finished" from="Intro" to="Loop" method="play"]

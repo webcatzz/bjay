@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://hnnpjn746vu3"]
+[gd_scene load_steps=10 format=3 uid="uid://hnnpjn746vu3"]
 
 [ext_resource type="Script" uid="uid://iltnbgbl6utm" path="res://scenes/route/route.gd" id="1_msb17"]
 [ext_resource type="PackedScene" uid="uid://byfvyojcv272m" path="res://scenes/route/parts/player.tscn" id="2_enbfm"]
 [ext_resource type="PackedScene" uid="uid://b5ffmn12701vc" path="res://scenes/route/parts/route_start.tscn" id="4_1gebr"]
 [ext_resource type="PackedScene" uid="uid://by05xaes2epwv" path="res://scenes/ui/wipe.tscn" id="4_ex5p1"]
+[ext_resource type="AudioStream" uid="uid://ctkx4vtj15k1e" path="res://assets/audio/route_1.mp3" id="5_ex5p1"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_enbfm"]
 normal = Vector2(0, 1)
@@ -48,3 +49,8 @@ shape = SubResource("WorldBoundaryShape2D_ex5p1")
 [node name="Player" parent="." instance=ExtResource("2_enbfm")]
 z_index = 99
 position = Vector2(96, 100)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("5_ex5p1")
+autoplay = true

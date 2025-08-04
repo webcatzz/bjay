@@ -12,6 +12,7 @@ var phase: Phase
 
 @onready var player: Player = $Player
 @onready var wipe: Wipe = $Wipe
+@onready var music: AudioStreamPlayer = $Music
 
 
 func _ready() -> void:
