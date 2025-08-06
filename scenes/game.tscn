@@ -33,5 +33,3 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_yqjtg")
 text = "(paused...)"
-
-[node name="Music" type="AudioStreamPlayer" parent="."]

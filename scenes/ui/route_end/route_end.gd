@@ -1,16 +1,22 @@
 extends Node
 
+const Stack = preload("res://scenes/route/parts/packages.gd")
+
 
 func _ready() -> void:
-	for item: Item in Game.inventory:
-		if item.destination == Game.place:
-			Game.delivered_items.append(item)
-	Game.inventory.clear()
-	
-	var stack: Control = $MailStack
+	fill_stack($UndeliveredItems, Game.inventory)
+	for place: Place in Game.delivered_items:
+		var stack := Stack.new()
+		stack.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		stack.spacing.y = -6.0
+		fill_stack(stack, Game.delivered_items[place])
+		$DeliveredItems.add_child(stack)
+
+
+func fill_stack(stack: Stack, array: Array, delay: float = 0.0) -> void:
 	var tween := create_tween()
-	while not Game.delivered_items.is_empty():
-		tween.tween_callback(stack.item_types.append.bind(Game.delivered_items.pop_back().type))
+	for item: Item in array:
+		tween.tween_callback(stack.item_types.append.bind(item.type))
 		tween.tween_callback(stack.queue_redraw)
 		tween.tween_interval(0.1)
 

@@ -2,8 +2,6 @@ extends CharacterBody2D
 
 enum State {MOVE, DASH_WINDUP, DASH, DEATH}
 
-const MAX_HEAT: float = 5.0
-
 var input: Vector2
 var direction: Vector2
 var speed: float = 200.0
@@ -91,9 +89,8 @@ func set_invincible(value: bool) -> void:
 
 
 func parachute_item() -> void:
-	var idx: int = randi_range(0, Game.inventory.size() - 1)
-	var item: Item = Game.inventory[idx]
-	Game.remove_item(idx)
+	var item: Item = Game.inventory[randi_range(0, Game.inventory.size() - 1)]
+	Game.remove_item(item)
 	
 	await get_tree().process_frame
 	var node := preload("res://scenes/route/parts/item_parachute.tscn").instantiate()
@@ -133,7 +130,7 @@ func _on_visibility_changed() -> void:
 
 
 func _on_health_changed(by: int) -> void:
-	var ratio: float = 1.0 - float(Game.health) / Game.MAX_HEALTH
+	var ratio: float = 1.0 - float(Game.health) / Game.max_health
 	$LowHealthParticles.amount_ratio = ratio
 	$LowHealthParticles.modulate.a = ratio
 	

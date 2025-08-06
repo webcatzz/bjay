@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://i6o2r6r1iyi3"]
+
+[ext_resource type="Script" uid="uid://biud4jdwudrk3" path="res://scenes/route/phases/rest/rest.gd" id="1_1wvij"]
+[ext_resource type="FontVariation" uid="uid://bncotpivm8rm0" path="res://assets/fonts/beetle.tres" id="2_6sn4l"]
+[ext_resource type="FontVariation" uid="uid://2dxcelrj36ss" path="res://assets/fonts/dandelion.tres" id="3_1wvij"]
+
+[node name="Rest" type="Node"]
+script = ExtResource("1_1wvij")
+wipe_color = Color(0, 0, 0, 1)
+hide_player = true
+metadata/_custom_type_script = "uid://cya5l21i60qn2"
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -3.0
+offset_right = 21.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6sn4l")
+text = "came upon a"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_1wvij")
+text = "rest stop"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="RepairLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6sn4l")
+text = "repaired your plane"
+horizontal_alignment = 1
+
+[node name="RepairAmount" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.917647, 0.709804, 1)
+theme_override_fonts/font = ExtResource("2_6sn4l")
+text = "+4 hp"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="end"]

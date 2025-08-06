@@ -9,6 +9,7 @@ const RECT := Rect2(0.0, 0.0, 192.0, 144.0)
 @export var first_phase: PackedScene = preload("res://scenes/route/phases/night/night_phase.tscn")
 
 var phase: Phase
+var next_phase: Phase
 
 @onready var player: Player = $Player
 @onready var wipe: Wipe = $Wipe
@@ -16,10 +17,11 @@ var phase: Phase
 
 
 func _ready() -> void:
+	Game.health = Game.max_health
 	Map.generate()
 	for i: int in 5:
 		var item := Item.new()
-		item.type = preload("res://resources/item_type/package.tres")
+		item.type = load("res://resources/item_type/package.tres")
 		item.destination = Map.destination
 		Game.add_item(item)
 	
@@ -30,21 +32,28 @@ func _ready() -> void:
 
 
 func step(branch: int = 0 if Game.place.next_places.size() == 1 else -1) -> void:
-	await wipe_in()
-	phase.queue_free()
 	if branch == -1:
-		phase = preload("res://scenes/route/phases/night/night_phase.tscn").instantiate()
+		next_phase = preload("res://scenes/route/phases/night/night_phase.tscn").instantiate()
 	else:
 		Game.place = Game.place.next_places[branch]
-		phase = Game.place.type.scene.instantiate()
-	add_child(phase)
+		if Game.place == Map.destination:
+			await wipe_in(false)
+			get_tree().change_scene_to_file("res://scenes/ui/route_end/route_end.tscn")
+			return
+		next_phase = Game.place.type.scene.instantiate()
+	await wipe_in(not phase.hide_player and not next_phase.hide_player)
+	phase.queue_free()
+	add_child(next_phase)
+	phase = next_phase
+	next_phase = null
 	wipe_out()
 
 
 # wipe
 
-func wipe_in() -> void:
-	player.z_index = wipe.z_index
+func wipe_in(raise_player: bool = true) -> void:
+	if raise_player:
+		player.z_index = wipe.z_index
 	wipe.modulate = phase.wipe_color
 	await wipe.wipe_in()
 

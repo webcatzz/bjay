@@ -4,16 +4,13 @@ signal inventory_changed
 signal health_changed(by: int)
 signal place_changed
 
-const MAX_HEALTH: int = 1
-
 var inventory: Array[Item]
-var health: int = MAX_HEALTH : set = _set_health
+var max_health: int = 10
+var health: int = max_health : set = _set_health
 var place: Place : set = _set_place
 
-var delivered_items: Array[Item]
+var delivered_items: Dictionary[Place, Array]
 var data: Dictionary[String, Variant]
-
-@onready var music: AudioStreamPlayer = $Music
 
 
 # inventory
@@ -23,9 +20,14 @@ func add_item(item: Item) -> void:
 	inventory_changed.emit()
 
 
-func remove_item(idx: int) -> void:
-	inventory.remove_at(idx)
+func remove_item(item: Item) -> void:
+	inventory.erase(item)
 	inventory_changed.emit()
+
+
+func deliver_item(item: Item) -> void:
+	delivered_items.get_or_add(item.destination, []).append(item)
+	remove_item(item)
 
 
 # health
@@ -41,15 +43,9 @@ func _set_health(value: int) -> void:
 func _set_place(value: Place) -> void:
 	place = value
 	place_changed.emit()
-	if place == Map.destination:
-		get_tree().change_scene_to_file("res://scenes/ui/route_end/route_end.tscn")
-
-
-# music
-
-func play_music(stream: AudioStream) -> void:
-	music.stream = stream
-	music.play()
+	for item: Item in inventory:
+		if item.destination == place:
+			deliver_item(item)
 
 
 # pause

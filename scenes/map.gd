@@ -6,6 +6,7 @@ const PLACE_WEIGHTS: Dictionary[String, float] = {
 	bird = 0.75,
 	glass = 0.75,
 	lightning = 0.25,
+	rest = 0.25,
 }
 
 var origin := Place.new()

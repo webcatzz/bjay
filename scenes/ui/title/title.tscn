@@ -53,6 +53,45 @@ text = "Config"
 layout_mode = 2
 text = "Quit"
 
+[node name="Config" type="PanelContainer" parent="Margins"]
+visible = false
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="Margins/Config"]
+layout_mode = 2
+columns = 2
+
+[node name="VolumeLabel" type="Label" parent="Margins/Config/Grid"]
+layout_mode = 2
+text = "Master volume"
+
+[node name="VolumeSlider" type="HSlider" parent="Margins/Config/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicLabel" type="Label" parent="Margins/Config/Grid"]
+layout_mode = 2
+text = "Music volume"
+
+[node name="MusicSlider" type="HSlider" parent="Margins/Config/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SFXLabel" type="Label" parent="Margins/Config/Grid"]
+layout_mode = 2
+text = "SFX volume"
+
+[node name="SFXSlider" type="HSlider" parent="Margins/Config/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OnehitLabel" type="Label" parent="Margins/Config/Grid"]
+layout_mode = 2
+text = "Dipshit mode"
+
+[node name="OnehitCheckbox" type="CheckBox" parent="Margins/Config/Grid"]
+layout_mode = 2
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_01j4y")
 autoplay = true
