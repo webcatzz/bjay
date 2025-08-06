@@ -38,8 +38,10 @@ spacing = Vector2(0, -6)
 [node name="Intro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vdxtl")
 autoplay = true
+bus = &"Music"
 
 [node name="Loop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_buq6c")
+bus = &"Music"
 
 [connection signal="finished" from="Intro" to="Loop" method="play"]

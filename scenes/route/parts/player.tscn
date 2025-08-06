@@ -284,7 +284,7 @@ shape = SubResource("CircleShape2D_d610k")
 [node name="LowHealthParticles" type="GPUParticles2D" parent="."]
 show_behind_parent = true
 material = ExtResource("3_1hui5")
-amount = 1
+amount = 2
 amount_ratio = 0.0
 texture = SubResource("GradientTexture2D_4ho2n")
 randomness = 0.25

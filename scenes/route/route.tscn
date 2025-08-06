@@ -54,3 +54,4 @@ position = Vector2(96, 100)
 process_mode = 3
 stream = ExtResource("5_ex5p1")
 autoplay = true
+bus = &"Music"
