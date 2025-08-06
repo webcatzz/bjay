@@ -1,24 +1,12 @@
 extends Node
 
-const TYPING_DELAY: float = 0.04
-const PUNCTUATION_TYPING_DELAY: float = 0.08
-const PUNCTUATION: String = ".,?!"
-
-var dialogue := Dialogue.new()
-
 @onready var box: Panel = $Box
-@onready var speaker_label: Label = $Box/Speaker
-@onready var text_label: Label = $Box/Text
-@onready var indicator: TextureRect = $Box/Text/Indicator
-@onready var options_box: PanelContainer = $Box/Options
-@onready var options_list: VBoxContainer = $Box/Options/VBox
-@onready var typing_timer: Timer = $TypingTimer
 @onready var animator: AnimationPlayer = $Animator
 
 
-func display(string: String, key: String = "") -> void:
-	dialogue.start(string, key)
+func display(dialogue: Dialogue) -> void:
 	animator.play(&"intro")
+	box.display(dialogue)
 
 
 func _type() -> void:
@@ -75,10 +63,5 @@ func _on_stopped() -> void:
 
 func _on_box_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"ui_accept"):
-		if typing_timer.is_stopped():
-			dialogue.step()
-		else:
-			typing_timer.stop()
-			text_label.visible_ratio = 1.0
-			indicator.show()
+		box.step()
 		box.accept_event()

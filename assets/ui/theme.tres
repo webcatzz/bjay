@@ -1,6 +1,9 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cf3p5ujacdbni"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cf3p5ujacdbni"]
 
 [ext_resource type="FontVariation" uid="uid://frob5yrgl4h6" path="res://assets/fonts/twig.tres" id="1_6cha6"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6cha6"]
+
 [resource]
 default_font = ExtResource("1_6cha6")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_6cha6")

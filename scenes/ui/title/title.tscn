@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhlcn6ahmfn20"]
 
 [ext_resource type="Script" uid="uid://da4764nleuy3y" path="res://scenes/ui/title/title.gd" id="1_gl121"]
-[ext_resource type="StyleBox" uid="uid://cqtd6d34rg377" path="res://assets/ui/paper.tres" id="2_7hvf5"]
-[ext_resource type="PackedScene" uid="uid://nosj7aeffc0h" path="res://scenes/ui/dialogue_option.tscn" id="3_yjwoi"]
+[ext_resource type="AudioStream" uid="uid://del3acbfueptk" path="res://assets/audio/title.mp3" id="3_01j4y"]
+[ext_resource type="Texture2D" uid="uid://mbyypdxkiclr" path="res://assets/title.png" id="4_abq4q"]
 
 [node name="Title" type="Node"]
 script = ExtResource("1_gl121")
@@ -13,33 +13,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.533333, 0.831373, 0.890196, 1)
+color = Color(0.886275, 0.984314, 1, 1)
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.5
-offset_top = -18.5
-offset_right = 20.5
-offset_bottom = 18.5
+[node name="Margins" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("2_7hvf5")
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="VBox" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBox" type="VBoxContainer" parent="Margins"]
 layout_mode = 2
-theme_override_constants/separation = -2
+theme_override_constants/separation = -16
 
-[node name="Play" parent="PanelContainer/VBox" instance=ExtResource("3_yjwoi")]
+[node name="Title" type="TextureRect" parent="Margins/VBox"]
 layout_mode = 2
-text = "Start"
+texture = ExtResource("4_abq4q")
+expand_mode = 5
 
-[node name="Quit" parent="PanelContainer/VBox" instance=ExtResource("3_yjwoi")]
+[node name="Options" type="VBoxContainer" parent="Margins/VBox"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Play" type="Button" parent="Margins/VBox/Options"]
+layout_mode = 2
+text = "Play"
+
+[node name="Config" type="Button" parent="Margins/VBox/Options"]
+layout_mode = 2
+disabled = true
+text = "Config"
+
+[node name="Quit" type="Button" parent="Margins/VBox/Options"]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="PanelContainer/VBox/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="PanelContainer/VBox/Quit" to="." method="_on_quit_pressed"]
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_01j4y")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="Margins/VBox/Options/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Margins/VBox/Options/Quit" to="." method="_on_quit_pressed"]

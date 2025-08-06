@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckfv42et1hafh"]
+
+[ext_resource type="Script" uid="uid://b0po8t6nd17sh" path="res://scenes/ui/typing_label.gd" id="1_jyj2j"]
+
+[node name="TypingLabel" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jyj2j")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_type"]

@@ -11,5 +11,4 @@ region = Rect2(8, 0, 8, 8)
 script = ExtResource("1_gmhv0")
 name = "envelope"
 texture = SubResource("AtlasTexture_h5r77")
-description = ""
 metadata/_custom_type_script = "uid://56bykvnxg2ag"

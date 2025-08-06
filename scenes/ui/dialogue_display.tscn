@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://cb0sb3jfjuc3a"]
+[gd_scene load_steps=20 format=3 uid="uid://cb0sb3jfjuc3a"]
 
 [ext_resource type="Script" uid="uid://dbspql2eejddq" path="res://scenes/ui/dialogue_display.gd" id="1_voa2j"]
 [ext_resource type="Texture2D" uid="uid://b38kq5q8i3jv" path="res://assets/paper_line.png" id="2_er6ti"]
+[ext_resource type="Script" uid="uid://j8vseqgqapqk" path="res://scenes/ui/dialogue_box.gd" id="3_n84fu"]
 [ext_resource type="StyleBox" uid="uid://cqtd6d34rg377" path="res://assets/ui/paper.tres" id="3_q6dau"]
 [ext_resource type="Texture2D" uid="uid://bvd84yvqdajbo" path="res://assets/dialogue_next.png" id="4_uyhxv"]
 [ext_resource type="FontVariation" uid="uid://bncotpivm8rm0" path="res://assets/fonts/beetle.tres" id="6_n84fu"]
@@ -334,6 +335,7 @@ grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 2
 theme_override_styles/panel = ExtResource("3_q6dau")
+script = ExtResource("3_n84fu")
 
 [node name="Speaker" type="Label" parent="Box"]
 layout_mode = 1

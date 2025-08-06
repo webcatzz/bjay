@@ -2,7 +2,7 @@ extends Node
 
 
 func _ready() -> void:
-	$PanelContainer/VBox/Play.grab_focus()
+	$Margins/VBox/Options/Play.grab_focus()
 
 
 func _on_play_pressed() -> void:
