@@ -4,7 +4,7 @@ signal inventory_changed
 signal health_changed(by: int)
 signal place_changed
 
-const MAX_HEALTH: int = 10
+const MAX_HEALTH: int = 1
 
 var inventory: Array[Item]
 var health: int = MAX_HEALTH : set = _set_health
@@ -34,8 +34,6 @@ func _set_health(value: int) -> void:
 	var by: float = value - health
 	health = value
 	health_changed.emit(by)
-	if health <= 0:
-		get_tree().change_scene_to_file.call_deferred("res://scenes/ui/game_over.tscn")
 
 
 # place

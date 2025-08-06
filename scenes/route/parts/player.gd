@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum State {MOVE, DASH_WINDUP, DASH}
+enum State {MOVE, DASH_WINDUP, DASH, DEATH}
 
 const MAX_HEAT: float = 5.0
 
@@ -17,6 +17,7 @@ var dash_query_params := PhysicsShapeQueryParameters2D.new()
 @onready var animator: AnimationPlayer = $Animator
 @onready var dash_bar: TextureProgressBar = $DashBar
 @onready var invincibility_timer: Timer = $InvincibilityTimer
+@onready var route: Route = get_parent()
 
 
 # movement
@@ -117,6 +118,14 @@ func _on_hitstop_ended() -> void:
 	input = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 
 
+func die() -> void:
+	state = State.DEATH
+	$DeathParticles.emitting = true
+	var tween := create_tween()
+	tween.tween_property(self, ^"position", Vector2(position.x + 32.0, Route.RECT.end.y + 22.0), 4.0)
+	tween.tween_callback(get_tree().change_scene_to_file.bind("res://scenes/ui/game_over.tscn"))
+
+
 # ui
 
 func _on_visibility_changed() -> void:
@@ -128,8 +137,12 @@ func _on_health_changed(by: int) -> void:
 	$LowHealthParticles.amount_ratio = ratio
 	$LowHealthParticles.modulate.a = ratio
 	
-	if by < 0:
-		state = State.MOVE
+	if Game.health == 0:
+		die()
+	
+	elif by < 0:
+		if state != State.DEATH:
+			state = State.MOVE
 		animator.play(&"hurt")
 		if not Game.inventory.is_empty():
 			parachute_item()
