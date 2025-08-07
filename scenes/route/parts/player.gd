@@ -118,8 +118,10 @@ func _on_hitstop_ended() -> void:
 func die() -> void:
 	state = State.DEATH
 	$DeathParticles.emitting = true
+	$UI/DeathOverlay.show()
 	var tween := create_tween()
 	tween.tween_property(self, ^"position", Vector2(position.x + 32.0, Route.RECT.end.y + 22.0), 4.0)
+	tween.parallel().tween_property($UI/DeathOverlay, ^"modulate:a", 1.0, 4.0).from(0.0)
 	tween.tween_callback(get_tree().change_scene_to_file.bind("res://scenes/ui/game_over.tscn"))
 
 

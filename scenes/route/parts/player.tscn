@@ -379,7 +379,6 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="PlaceLabel" type="Label" parent="UI/Bottom"]
-visible = false
 material = ExtResource("3_1hui5")
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0.356863, 0.305882, 0.8, 1)
@@ -410,6 +409,14 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 4
 theme_override_fonts/font = ExtResource("7_a13su")
 text = "×5"
+
+[node name="DeathOverlay" type="ColorRect" parent="UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="timeout" from="HitstopTimer" to="." method="_on_hitstop_ended"]
