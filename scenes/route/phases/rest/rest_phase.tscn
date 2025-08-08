@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://i6o2r6r1iyi3"]
 
-[ext_resource type="Script" uid="uid://biud4jdwudrk3" path="res://scenes/route/phases/rest/rest.gd" id="1_1wvij"]
-[ext_resource type="FontVariation" uid="uid://bncotpivm8rm0" path="res://assets/fonts/beetle.tres" id="2_6sn4l"]
-[ext_resource type="FontVariation" uid="uid://2dxcelrj36ss" path="res://assets/fonts/dandelion.tres" id="3_1wvij"]
+[ext_resource type="Script" uid="uid://biud4jdwudrk3" path="res://scenes/route/phases/rest/rest_phase.gd" id="1_kjph3"]
+[ext_resource type="FontVariation" uid="uid://bncotpivm8rm0" path="res://assets/fonts/beetle.tres" id="2_f53vl"]
+[ext_resource type="FontVariation" uid="uid://2dxcelrj36ss" path="res://assets/fonts/dandelion.tres" id="3_3dqe3"]
 
 [node name="Rest" type="Node"]
-script = ExtResource("1_1wvij")
-wipe_color = Color(0, 0, 0, 1)
+script = ExtResource("1_kjph3")
+wipe_color = Color(0.356863, 0.305882, 0.8, 1)
 hide_player = true
 metadata/_custom_type_script = "uid://cya5l21i60qn2"
 
@@ -17,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.356863, 0.305882, 0.8, 1)
 
 [node name="VBox" type="VBoxContainer" parent="Background"]
 layout_mode = 1
@@ -37,13 +37,13 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Background/VBox"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6sn4l")
+theme_override_fonts/font = ExtResource("2_f53vl")
 text = "came upon a"
 horizontal_alignment = 1
 
 [node name="Title" type="Label" parent="Background/VBox"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_1wvij")
+theme_override_fonts/font = ExtResource("3_3dqe3")
 text = "rest stop"
 horizontal_alignment = 1
 
@@ -53,14 +53,14 @@ layout_mode = 2
 
 [node name="RepairLabel" type="Label" parent="Background/VBox"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6sn4l")
+theme_override_fonts/font = ExtResource("2_f53vl")
 text = "repaired your plane"
 horizontal_alignment = 1
 
 [node name="RepairAmount" type="Label" parent="Background/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.917647, 0.709804, 1)
-theme_override_fonts/font = ExtResource("2_6sn4l")
+theme_override_fonts/font = ExtResource("2_f53vl")
 text = "+4 hp"
 horizontal_alignment = 1
 
