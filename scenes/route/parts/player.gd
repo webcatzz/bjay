@@ -103,7 +103,7 @@ func parachute_item() -> void:
 	tween.tween_property(node, ^"position:y", Route.RECT.position.y, 0.5)
 	await tween.finished
 	node.position.x = Route.randf_along(0, -16.0)
-	Route.guide(node, preload("res://assets/paths/wave_down.tres"), 64.0)
+	Route.guide(node, preload("res://assets/paths/parachute.tres"), 64.0)
 
 
 func hitstop() -> void:

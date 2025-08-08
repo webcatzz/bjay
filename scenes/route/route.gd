@@ -38,9 +38,9 @@ func step(branch: int = 0 if Game.place.next_places.size() == 1 else -1) -> void
 				idx += 1
 		# ending route if at destination
 		if Game.place == Map.destination:
-			await Game.wipe.wipe_in(Color("#5b4ecc"))
+			await Game.wipe.wipe_in(phase.wipe_color)
 			get_tree().change_scene_to_file("res://scenes/ui/route_end/route_end.tscn")
-			Game.wipe.wipe_out()
+			Game.wipe.wipe_out(Color("#5b4ecc"))
 			return
 		next_phase = Game.place.type.scene.instantiate()
 	# wipe in
