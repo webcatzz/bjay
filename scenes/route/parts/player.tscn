@@ -330,7 +330,7 @@ process_material = SubResource("ParticleProcessMaterial_l016n")
 
 [node name="DashBar" type="TextureProgressBar" parent="."]
 visible = false
-z_index = 99
+z_index = 1
 offset_left = -6.0
 offset_top = -36.0
 offset_right = 6.0

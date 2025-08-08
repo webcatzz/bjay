@@ -11,6 +11,7 @@ hide_player = true
 metadata/_custom_type_script = "uid://cya5l21i60qn2"
 
 [node name="Background" type="ColorRect" parent="."]
+z_index = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,44 +19,45 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="Background"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -3.0
-offset_right = 21.0
-offset_bottom = 3.0
+offset_left = -35.0
+offset_top = -22.0
+offset_right = 35.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="Background/VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6sn4l")
 text = "came upon a"
 horizontal_alignment = 1
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="Background/VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_1wvij")
 text = "rest stop"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="VBoxContainer"]
+[node name="Spacer" type="Control" parent="Background/VBox"]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="RepairLabel" type="Label" parent="VBoxContainer"]
+[node name="RepairLabel" type="Label" parent="Background/VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6sn4l")
 text = "repaired your plane"
 horizontal_alignment = 1
 
-[node name="RepairAmount" type="Label" parent="VBoxContainer"]
+[node name="RepairAmount" type="Label" parent="Background/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.917647, 0.709804, 1)
 theme_override_fonts/font = ExtResource("2_6sn4l")
