@@ -19,6 +19,8 @@ var data: Dictionary[String, Variant]
 
 func start_route() -> void:
 	health = max_health
+	inventory.clear()
+	deliveries.clear()
 	Map.generate()
 	for i: int in 5:
 		var item := Item.new()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://xk5g81xfxyw5"]
+[gd_scene load_steps=12 format=3 uid="uid://xk5g81xfxyw5"]
 
 [ext_resource type="Script" uid="uid://bhc13h2evbp83" path="res://scenes/ui/route_end/route_end.gd" id="1_3728a"]
 [ext_resource type="Script" uid="uid://d2tdjpk42dv2l" path="res://scenes/route/parts/constellation.gd" id="2_eak2d"]
 [ext_resource type="Script" uid="uid://cyo3asylv35ax" path="res://scenes/route/parts/item_stack.gd" id="2_vdxtl"]
 [ext_resource type="AudioStream" uid="uid://chluhykyywsq7" path="res://assets/audio/win.mp3" id="3_vdxtl"]
 [ext_resource type="AudioStream" uid="uid://bcporfu2akxm4" path="res://assets/audio/night.mp3" id="4_buq6c"]
+[ext_resource type="FontVariation" uid="uid://bncotpivm8rm0" path="res://assets/fonts/beetle.tres" id="5_y0lmw"]
 [ext_resource type="Texture2D" uid="uid://cewr0qj0u5vxh" path="res://assets/cloud_top.png" id="6_2m1kg"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y0lmw"]
@@ -17,7 +18,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Cloud:position")
+tracks/0/path = NodePath("CloudFore:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -29,7 +30,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Cloud2:position")
+tracks/1/path = NodePath("CloudBack:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -46,7 +47,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Cloud:position")
+tracks/0/path = NodePath("CloudFore:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -58,7 +59,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Cloud2:position")
+tracks/1/path = NodePath("CloudBack:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -87,26 +88,19 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.356863, 0.305882, 0.8, 1)
 
-[node name="Cloud" type="PanelContainer" parent="."]
-anchors_preset = 10
-anchor_right = 1.0
-offset_right = 88.0
-offset_bottom = 72.0
+[node name="InputHint" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_y0lmw")
-
-[node name="Cloud2" type="PanelContainer" parent="."]
-modulate = Color(1, 1, 1, 0.5)
-anchors_preset = 10
-anchor_right = 1.0
-offset_right = 48.0
-offset_bottom = 80.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_y0lmw")
-
-[node name="Constellation" type="Node2D" parent="."]
-position = Vector2(96, 48)
-script = ExtResource("2_eak2d")
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_y0lmw")
+text = "[z] continue"
+horizontal_alignment = 1
 
 [node name="UndeliveredItems" type="Control" parent="."]
 custom_minimum_size = Vector2(10, 10)
@@ -138,13 +132,37 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DeliveredItems" type="HBoxContainer" parent="."]
-anchors_preset = -1
+[node name="CloudBack" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.5
+offset_right = 48.0
+offset_bottom = 80.0
 grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_y0lmw")
+
+[node name="CloudFore" type="Panel" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 88.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_y0lmw")
+
+[node name="Constellation" type="Node2D" parent="."]
+position = Vector2(96, 48)
+script = ExtResource("2_eak2d")
+
+[node name="ItemCount" type="Label" parent="Constellation"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_y0lmw")
+text = "×0"
 
 [node name="Intro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vdxtl")

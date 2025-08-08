@@ -152,6 +152,7 @@ func _on_health_changed(by: int) -> void:
 
 
 func _on_inventory_changed() -> void:
+	$UI/Bottom/Mail.visible = not Game.inventory.is_empty()
 	$UI/Bottom/Mail/Sprites.display(Game.inventory)
 	$UI/Bottom/Mail/Label.text = "×" + str(Game.inventory.size())
 
