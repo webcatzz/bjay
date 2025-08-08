@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv52kxk5s7v1j"]
+[gd_scene load_steps=4 format=3 uid="uid://dv52kxk5s7v1j"]
 
 [ext_resource type="Script" uid="uid://dqsuayd75s5dt" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://by05xaes2epwv" path="res://scenes/ui/wipe.tscn" id="2_lnu2h"]
 [ext_resource type="FontVariation" uid="uid://bncotpivm8rm0" path="res://assets/fonts/beetle.tres" id="2_yqjtg"]
 
 [node name="Game" type="Node"]
 process_mode = 3
 script = ExtResource("1_uwrxv")
+
+[node name="Wipe" parent="." instance=ExtResource("2_lnu2h")]
+visible = false
+modulate = Color(0.356863, 0.305882, 0.8, 1)
+z_index = 99
 
 [node name="Pause" type="CanvasLayer" parent="."]
 layer = 2

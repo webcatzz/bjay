@@ -6,7 +6,8 @@ func _ready() -> void:
 
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/route/route.tscn")
+	Game.wipe.fill()
+	Game.start_route()
 
 
 func _on_quit_pressed() -> void:

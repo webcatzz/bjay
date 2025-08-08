@@ -1,5 +1,7 @@
 extends Node
 
+const Wipe = preload("res://scenes/ui/wipe.gd")
+
 signal inventory_changed
 signal health_changed(by: int)
 signal place_changed
@@ -9,8 +11,21 @@ var max_health: int = 10
 var health: int = max_health : set = _set_health
 var place: Place : set = _set_place
 
-var delivered_items: Dictionary[Place, Array]
+var deliveries: Dictionary[Place, Array]
 var data: Dictionary[String, Variant]
+
+@onready var wipe: Wipe = $Wipe
+
+
+func start_route() -> void:
+	health = max_health
+	Map.generate()
+	for i: int in 5:
+		var item := Item.new()
+		item.type = load("res://resources/item_type/package.tres")
+		item.destination = Map.destination
+		add_item(item)
+	get_tree().change_scene_to_file("res://scenes/route/route.tscn")
 
 
 # inventory
@@ -20,14 +35,15 @@ func add_item(item: Item) -> void:
 	inventory_changed.emit()
 
 
-func remove_item(item: Item) -> void:
-	inventory.erase(item)
+func remove_item(idx: int) -> void:
+	inventory.remove_at(idx)
 	inventory_changed.emit()
 
 
-func deliver_item(item: Item) -> void:
-	delivered_items.get_or_add(item.destination, []).append(item)
-	remove_item(item)
+func deliver_item(idx: int) -> void:
+	var item: Item = inventory[idx]
+	deliveries.get_or_add(item.destination, []).append(item)
+	remove_item(idx)
 
 
 # health
@@ -43,9 +59,6 @@ func _set_health(value: int) -> void:
 func _set_place(value: Place) -> void:
 	place = value
 	place_changed.emit()
-	for item: Item in inventory:
-		if item.destination == place:
-			deliver_item(item)
 
 
 # pause

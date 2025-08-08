@@ -1,9 +1,78 @@
-[gd_scene load_steps=5 format=3 uid="uid://xk5g81xfxyw5"]
+[gd_scene load_steps=11 format=3 uid="uid://xk5g81xfxyw5"]
 
 [ext_resource type="Script" uid="uid://bhc13h2evbp83" path="res://scenes/ui/route_end/route_end.gd" id="1_3728a"]
-[ext_resource type="Script" uid="uid://cyo3asylv35ax" path="res://scenes/route/parts/packages.gd" id="2_vdxtl"]
+[ext_resource type="Script" uid="uid://d2tdjpk42dv2l" path="res://scenes/route/parts/constellation.gd" id="2_eak2d"]
+[ext_resource type="Script" uid="uid://cyo3asylv35ax" path="res://scenes/route/parts/item_stack.gd" id="2_vdxtl"]
 [ext_resource type="AudioStream" uid="uid://chluhykyywsq7" path="res://assets/audio/win.mp3" id="3_vdxtl"]
 [ext_resource type="AudioStream" uid="uid://bcporfu2akxm4" path="res://assets/audio/night.mp3" id="4_buq6c"]
+[ext_resource type="Texture2D" uid="uid://cewr0qj0u5vxh" path="res://assets/cloud_top.png" id="6_2m1kg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y0lmw"]
+texture = ExtResource("6_2m1kg")
+texture_margin_bottom = 8.0
+axis_stretch_horizontal = 1
+
+[sub_resource type="Animation" id="Animation_y0lmw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cloud:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cloud2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2m1kg"]
+resource_name = "scroll"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cloud:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-80, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cloud2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-40, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sajam"]
+_data = {
+&"RESET": SubResource("Animation_y0lmw"),
+&"scroll": SubResource("Animation_2m1kg")
+}
 
 [node name="RouteEnd" type="Node"]
 script = ExtResource("1_3728a")
@@ -18,18 +87,26 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.356863, 0.305882, 0.8, 1)
 
-[node name="Bed" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = 8.0
-offset_right = 16.0
-offset_bottom = 32.0
+[node name="Cloud" type="PanelContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 88.0
+offset_bottom = 72.0
 grow_horizontal = 2
-grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_y0lmw")
+
+[node name="Cloud2" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 48.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_y0lmw")
+
+[node name="Constellation" type="Node2D" parent="."]
+position = Vector2(96, 48)
+script = ExtResource("2_eak2d")
 
 [node name="UndeliveredItems" type="Control" parent="."]
 custom_minimum_size = Vector2(10, 10)
@@ -40,13 +117,26 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -43.0
-offset_top = 22.0
+offset_top = 40.0
 offset_right = -33.0
-offset_bottom = 32.0
+offset_bottom = 50.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 script = ExtResource("2_vdxtl")
 spacing = Vector2(0, -6)
+
+[node name="Bed" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 26.0
+offset_right = 16.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="DeliveredItems" type="HBoxContainer" parent="."]
 anchors_preset = -1
@@ -64,5 +154,11 @@ bus = &"Music"
 [node name="Loop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_buq6c")
 bus = &"Music"
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sajam")
+}
+autoplay = "scroll"
 
 [connection signal="finished" from="Intro" to="Loop" method="play"]

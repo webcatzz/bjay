@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://e3enk75iqksm" path="res://assets/dash_bar_fill.png" id="5_1uxg6"]
 [ext_resource type="Texture2D" uid="uid://bkj15jjj0bxe7" path="res://assets/explosion.png" id="5_l016n"]
 [ext_resource type="FontVariation" uid="uid://bncotpivm8rm0" path="res://assets/fonts/beetle.tres" id="7_a13su"]
-[ext_resource type="Script" uid="uid://cyo3asylv35ax" path="res://scenes/route/parts/packages.gd" id="7_i6i3n"]
+[ext_resource type="Script" uid="uid://cyo3asylv35ax" path="res://scenes/route/parts/item_stack.gd" id="7_i6i3n"]
 [ext_resource type="Script" uid="uid://56bykvnxg2ag" path="res://resources/item_type/item_type.gd" id="8_ddm3y"]
 [ext_resource type="Resource" uid="uid://ckf7kfyxg7b8n" path="res://resources/item_type/package.tres" id="9_a13su"]
 [ext_resource type="Resource" uid="uid://0eqpj0ou51yb" path="res://resources/item_type/envelope.tres" id="10_l016n"]
@@ -379,6 +379,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="PlaceLabel" type="Label" parent="UI/Bottom"]
+visible = false
 material = ExtResource("3_1hui5")
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0.356863, 0.305882, 0.8, 1)

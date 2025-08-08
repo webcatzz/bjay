@@ -12,55 +12,48 @@ var phase: Phase
 var next_phase: Phase
 
 @onready var player: Player = $Player
-@onready var wipe: Wipe = $Wipe
 @onready var music: AudioStreamPlayer = $Music
 
 
 func _ready() -> void:
-	Game.health = Game.max_health
-	Map.generate()
-	for i: int in 5:
-		var item := Item.new()
-		item.type = load("res://resources/item_type/package.tres")
-		item.destination = Map.destination
-		Game.add_item(item)
-	
 	phase = first_phase.instantiate()
 	await get_tree().create_timer(0.5).timeout
 	add_child(phase)
-	wipe_out()
+	await Game.wipe.wipe_out()
+	player.z_index = 0
 
 
 func step(branch: int = 0 if Game.place.next_places.size() == 1 else -1) -> void:
+	# branch selection
 	if branch == -1:
 		next_phase = preload("res://scenes/route/phases/night/night_phase.tscn").instantiate()
 	else:
 		Game.place = Game.place.next_places[branch]
+		# delivering mail
+		var idx: int = 0
+		while idx < Game.inventory.size():
+			if Game.inventory[idx].destination == Game.place:
+				Game.deliver_item(idx)
+			else:
+				idx += 1
+		# ending route if at destination
 		if Game.place == Map.destination:
-			await wipe_in(false)
+			await Game.wipe.wipe_in(Color("#5b4ecc"))
 			get_tree().change_scene_to_file("res://scenes/ui/route_end/route_end.tscn")
+			Game.wipe.wipe_out()
 			return
 		next_phase = Game.place.type.scene.instantiate()
-	await wipe_in(not phase.hide_player and not next_phase.hide_player)
+	# wipe in
+	if not phase.hide_player and not next_phase.hide_player:
+		player.z_index = Game.wipe.z_index
+	await Game.wipe.wipe_in(phase.wipe_color)
+	# switching phases
 	phase.queue_free()
-	add_child(next_phase)
 	phase = next_phase
 	next_phase = null
-	wipe_out()
-
-
-# wipe
-
-func wipe_in(raise_player: bool = true) -> void:
-	if raise_player:
-		player.z_index = wipe.z_index
-	wipe.modulate = phase.wipe_color
-	await wipe.wipe_in()
-
-
-func wipe_out() -> void:
-	create_tween().tween_property(wipe, ^"modulate", phase.wipe_color, 0.25).set_trans(Tween.TRANS_CIRC)
-	await wipe.wipe_out()
+	add_child(phase)
+	# wipe out
+	await Game.wipe.wipe_out(phase.wipe_color)
 	player.z_index = 0
 
 

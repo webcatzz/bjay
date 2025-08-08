@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bct6qtt7gywyj"]
 
 [ext_resource type="Texture2D" uid="uid://b2rlhjnlgy2k2" path="res://assets/map_star.png" id="1_kj77o"]
-[ext_resource type="Script" uid="uid://bg1aote8m1gmk" path="res://scenes/route/phases/night/map_star.gd" id="2_y5etg"]
+[ext_resource type="Script" uid="uid://bg1aote8m1gmk" path="res://scenes/route/parts/constellation_star.gd" id="2_y5etg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5etg"]
 atlas = ExtResource("1_kj77o")

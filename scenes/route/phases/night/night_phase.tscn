@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://lap8y40sepq7"]
 
 [ext_resource type="Script" uid="uid://c3inrrquqo8es" path="res://scenes/route/phases/night/night_phase.gd" id="1_x4wib"]
-[ext_resource type="Script" uid="uid://dv7e33x4m16pj" path="res://scenes/route/phases/night/map_constellation.gd" id="2_c5284"]
 [ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="2_jtawh"]
+[ext_resource type="Script" uid="uid://d2tdjpk42dv2l" path="res://scenes/route/parts/constellation.gd" id="3_x4wib"]
 [ext_resource type="Texture2D" uid="uid://h7l07i48j8b4" path="res://assets/moon.png" id="4_x4wib"]
 
 [sub_resource type="Gradient" id="Gradient_jtawh"]
@@ -94,9 +94,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_jtawh")
 
-[node name="Map" type="Node2D" parent="Background"]
+[node name="Constellation" type="Node2D" parent="Background"]
 position = Vector2(96, 72)
-script = ExtResource("2_c5284")
+script = ExtResource("3_x4wib")
 
 [node name="Stars" type="GPUParticles2D" parent="Background"]
 position = Vector2(96, 72)

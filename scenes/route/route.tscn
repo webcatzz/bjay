@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://hnnpjn746vu3"]
+[gd_scene load_steps=9 format=3 uid="uid://hnnpjn746vu3"]
 
 [ext_resource type="Script" uid="uid://iltnbgbl6utm" path="res://scenes/route/route.gd" id="1_msb17"]
 [ext_resource type="PackedScene" uid="uid://byfvyojcv272m" path="res://scenes/route/parts/player.tscn" id="2_enbfm"]
 [ext_resource type="PackedScene" uid="uid://b5ffmn12701vc" path="res://scenes/route/parts/route_start.tscn" id="4_1gebr"]
-[ext_resource type="PackedScene" uid="uid://by05xaes2epwv" path="res://scenes/ui/wipe.tscn" id="4_ex5p1"]
 [ext_resource type="AudioStream" uid="uid://ctkx4vtj15k1e" path="res://assets/audio/route_1.mp3" id="5_ex5p1"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_enbfm"]
@@ -19,10 +18,6 @@ normal = Vector2(-1, 0)
 
 [node name="Route" type="Node"]
 script = ExtResource("1_msb17")
-
-[node name="Wipe" parent="." instance=ExtResource("4_ex5p1")]
-modulate = Color(0.356863, 0.305882, 0.8, 1)
-z_index = 99
 
 [node name="RouteStart" parent="." instance=ExtResource("4_1gebr")]
 

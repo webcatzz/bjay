@@ -89,8 +89,9 @@ func set_invincible(value: bool) -> void:
 
 
 func parachute_item() -> void:
-	var item: Item = Game.inventory[randi_range(0, Game.inventory.size() - 1)]
-	Game.remove_item(item)
+	var item_idx: int = randi_range(0, Game.inventory.size() - 1)
+	var item: Item = Game.inventory[item_idx]
+	Game.remove_item(item_idx)
 	
 	await get_tree().process_frame
 	var node := preload("res://scenes/route/parts/item_parachute.tscn").instantiate()
