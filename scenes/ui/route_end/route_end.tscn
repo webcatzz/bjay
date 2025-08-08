@@ -89,7 +89,7 @@ grow_vertical = 2
 color = Color(0.356863, 0.305882, 0.8, 1)
 
 [node name="InputHint" type="Label" parent="."]
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
