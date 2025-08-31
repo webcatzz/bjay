@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://lap8y40sepq7"]
+[gd_scene load_steps=19 format=3 uid="uid://lap8y40sepq7"]
 
 [ext_resource type="Script" uid="uid://c3inrrquqo8es" path="res://scenes/route/phases/night/night_phase.gd" id="1_x4wib"]
 [ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="2_jtawh"]
 [ext_resource type="Script" uid="uid://d2tdjpk42dv2l" path="res://scenes/route/parts/constellation.gd" id="3_x4wib"]
 [ext_resource type="Texture2D" uid="uid://h7l07i48j8b4" path="res://assets/moon.png" id="4_x4wib"]
+[ext_resource type="Shader" uid="uid://cds1wu7fg6dlh" path="res://assets/vfx/reflection.gdshader" id="5_8o2tv"]
+[ext_resource type="Texture2D" uid="uid://bjj7wjc04o3cu" path="res://assets/night_bar.png" id="5_c5284"]
 
 [sub_resource type="Gradient" id="Gradient_jtawh"]
 colors = PackedColorArray(0.2, 0.133333, 0.301961, 1, 0.2, 0.133333, 0.301961, 0)
@@ -61,6 +63,11 @@ alpha_curve = SubResource("CurveTexture_jtawh")
 [sub_resource type="AtlasTexture" id="AtlasTexture_c5284"]
 atlas = ExtResource("4_x4wib")
 region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pppyh"]
+shader = ExtResource("5_8o2tv")
+shader_parameter/offset = 0.0
+shader_parameter/scale = 1.0
 
 [node name="Night" type="Node"]
 script = ExtResource("1_x4wib")
@@ -128,6 +135,40 @@ texture = ExtResource("4_x4wib")
 centered = false
 region_enabled = true
 region_rect = Rect2(16, 0, 28, 8)
+
+[node name="Reflection" type="ColorRect" parent="Background"]
+visible = false
+material = SubResource("ShaderMaterial_pppyh")
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TimerBar" type="TextureProgressBar" parent="Background"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -24.0
+offset_right = 4.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 1.0
+step = 0.1
+value = 0.5
+fill_mode = 5
+texture_under = ExtResource("5_c5284")
+texture_progress = ExtResource("5_c5284")
+tint_under = Color(0.266667, 0.282353, 0.435294, 1)
+tint_progress = Color(0.2, 0.133333, 0.301961, 1)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

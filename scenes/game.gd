@@ -14,6 +14,10 @@ var place: Place : set = _set_place
 var deliveries: Dictionary[Place, Array]
 var data: Dictionary[String, Variant]
 
+var total_routes_completed: int
+var total_mail_delivered: int
+var total_mail_lost: int
+
 @onready var wipe: Wipe = $Wipe
 
 
@@ -21,7 +25,15 @@ func start_route() -> void:
 	health = max_health
 	inventory.clear()
 	deliveries.clear()
+	
+	match total_routes_completed if total_routes_completed < 5 else randf_range(0, 4):
+		0: Map.size = Vector2i(2, 1)
+		1: Map.size = Vector2i(3, 2)
+		2: Map.size = Vector2i(4, 2)
+		3: Map.size = Vector2i(5, 3)
+		4: Map.size = Vector2i(7, 3)
 	Map.generate()
+	
 	for i: int in 5:
 		var item := Item.new()
 		item.type = load("res://resources/item_type/package.tres")
@@ -46,6 +58,7 @@ func deliver_item(idx: int) -> void:
 	var item: Item = inventory[idx]
 	deliveries.get_or_add(item.destination, []).append(item)
 	remove_item(idx)
+	total_mail_delivered += 1
 
 
 # health

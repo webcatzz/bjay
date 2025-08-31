@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bnns74q1166ux" path="res://assets/vfx/dither.tres" id="1_8547y"]
 [ext_resource type="PackedScene" uid="uid://ds5fphucp3sqr" path="res://scenes/route/parts/hitbox.tscn" id="1_vuv32"]
-[ext_resource type="Texture2D" uid="uid://bkx5b53lqjbtn" path="res://assets/arrow.png" id="2_8547y"]
+[ext_resource type="Texture2D" uid="uid://dtnhcpcbagjve" path="res://assets/fish_bullet.png" id="2_8547y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vuv32"]
 resource_local_to_scene = true
@@ -13,6 +13,7 @@ material = ExtResource("1_8547y")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 material = ExtResource("1_8547y")
+position = Vector2(-1, 0)
 texture = ExtResource("2_8547y")
 
 [node name="Hitbox" parent="." instance=ExtResource("1_vuv32")]

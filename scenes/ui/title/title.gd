@@ -1,8 +1,17 @@
 extends Node
 
+@onready var animator: AnimationPlayer = $Animator
+
 
 func _ready() -> void:
-	$Margins/VBox/Options/Play.grab_focus()
+	animator.queue(&"webcatz")
+	animator.queue(&"title")
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"ui_accept"):
+		var queue: PackedStringArray = animator.get_queue()
+		if not queue.is_empty(): animator.play(queue[0])
 
 
 func _on_play_pressed() -> void:

@@ -11,7 +11,7 @@ const PLACE_WEIGHTS: Dictionary[String, float] = {
 
 var origin := Place.new()
 var destination := Place.new()
-var size := Vector2i(0, 3)
+var size := Vector2i(5, 3)
 
 var _grid: Dictionary[Vector2i, Place]
 var _rng := RandomNumberGenerator.new()

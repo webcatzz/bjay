@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cewr0qj0u5vxh"
-path="res://.godot/imported/cloud_top.png-7ccc98cec456a2aef27d76ce3bfcbd8a.ctex"
+uid="uid://dtnhcpcbagjve"
+path="res://.godot/imported/fish_bullet.png-2898b57b023923c0755b71f41e19d974.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cloud_top.png"
-dest_files=["res://.godot/imported/cloud_top.png-7ccc98cec456a2aef27d76ce3bfcbd8a.ctex"]
+source_file="res://assets/fish_bullet.png"
+dest_files=["res://.godot/imported/fish_bullet.png-2898b57b023923c0755b71f41e19d974.ctex"]
 
 [params]
 

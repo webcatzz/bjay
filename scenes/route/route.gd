@@ -85,10 +85,10 @@ static func edge(angle: float, origin: Vector2 = RECT.get_center()) -> Vector2:
 
 # paths
 
-static func guide(node: Node2D, curve: Curve2D, speed: float, rotate: bool = false) -> void:
+static func guide(node: Node2D, curve: Curve2D, speed: float, rotate: bool = false, callback: Callable = node.queue_free) -> void:
 	var tween := node.create_tween()
 	tween.tween_method((sample_path_transform if rotate else sample_path_position).bind(node, curve, node.position), 0.0, curve.get_baked_length(), curve.get_baked_length() / speed)
-	tween.tween_callback(node.queue_free)
+	tween.tween_callback(callback)
 
 
 static func sample_path_position(at: float, node: Node2D, curve: Curve2D, offset: Vector2) -> void:

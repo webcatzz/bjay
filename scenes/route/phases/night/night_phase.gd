@@ -6,10 +6,13 @@ var branch: int
 var branch_idxs: PackedInt32Array
 
 @onready var constellation: Constellation = $Background/Constellation
+@onready var timer_bar: TextureProgressBar = $Background/TimerBar
+@onready var timer: Timer = $Timer
 
 
 func _ready() -> void:
 	$Background/MoonShadow/Moon/Phase.position.x = randf_range(-20.0, 0.0)
+	timer_bar.max_value = timer.wait_time
 	
 	constellation.resize(Map.size)
 	var nodes: Dictionary[Place, Node2D]
@@ -30,6 +33,7 @@ func _physics_process(delta: float) -> void:
 	branch = remap(route.player.position.y, Route.RECT.position.y, Route.RECT.end.y, 0.0, Game.place.next_places.size())
 	for i: int in branch_idxs.size():
 		constellation.set_edge_color(branch_idxs[i], Palette.NIGHT[3 if i == branch else 2])
+	timer_bar.value = timer.time_left
 
 
 func end() -> void:

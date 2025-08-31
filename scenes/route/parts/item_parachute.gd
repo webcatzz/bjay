@@ -10,3 +10,8 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	Game.add_item(item)
 	queue_free()
+
+
+func lose() -> void:
+	Game.total_mail_lost += 1
+	queue_free()

@@ -5,12 +5,14 @@ const Stack = preload("res://scenes/route/parts/item_stack.gd")
 
 
 func _ready() -> void:
+	Game.total_routes_completed += 1
+	# undelivered
 	for item: Item in Game.inventory:
 		$UndeliveredItems.item_types.append(item.type)
 	# constellation
 	var constellation: Constellation = $Constellation
 	constellation.resize(Vector2i(Game.deliveries.size(), 1))
-	# stars + stacks
+	# stars + delivered stacks
 	var tween := create_tween()
 	var idx: int = 0
 	var item_count: int = 0

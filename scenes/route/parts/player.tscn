@@ -366,22 +366,17 @@ one_shot = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Bottom" type="VBoxContainer" parent="UI"]
+[node name="PlaceForecast" type="Label" parent="UI"]
+visible = false
+material = ExtResource("3_1hui5")
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = -12.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_top = -24.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="PlaceLabel" type="Label" parent="UI/Bottom"]
-visible = false
-material = ExtResource("3_1hui5")
-layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0.356863, 0.305882, 0.8, 1)
 theme_override_colors/font_outline_color = Color(0.356863, 0.305882, 0.8, 1)
 theme_override_constants/outline_size = 4
@@ -390,19 +385,28 @@ theme_override_fonts/font = ExtResource("7_a13su")
 text = "raincloud"
 horizontal_alignment = 1
 
-[node name="Mail" type="HBoxContainer" parent="UI/Bottom"]
-layout_mode = 2
+[node name="Mail" type="HBoxContainer" parent="UI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -14.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Sprites" type="Control" parent="UI/Bottom/Mail"]
+[node name="Sprites" type="Control" parent="UI/Mail"]
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
 script = ExtResource("7_i6i3n")
 item_types = Array[ExtResource("8_ddm3y")]([ExtResource("9_a13su"), ExtResource("9_a13su"), ExtResource("10_l016n"), ExtResource("9_a13su"), ExtResource("11_75kmm"), ExtResource("9_a13su")])
 spacing = Vector2(6, 0)
 
-[node name="Label" type="Label" parent="UI/Bottom/Mail"]
+[node name="Label" type="Label" parent="UI/Mail"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0.356863, 0.305882, 0.8, 1)
 theme_override_colors/font_outline_color = Color(0.356863, 0.305882, 0.8, 1)
@@ -418,6 +422,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.996078, 1, 0.952941, 1)
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="timeout" from="HitstopTimer" to="." method="_on_hitstop_ended"]

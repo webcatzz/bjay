@@ -58,6 +58,7 @@ func _set_dash_held_time(value: float) -> void:
 	dash_held_time = value
 	dash_bar.value = value
 	dash_bar.visible = value > 0.0
+	dash_bar.position.y = -36.0 if position.y > 48.0 else 24.0
 
 
 func dash() -> void:
@@ -103,7 +104,7 @@ func parachute_item() -> void:
 	tween.tween_property(node, ^"position:y", Route.RECT.position.y, 0.5)
 	await tween.finished
 	node.position.x = Route.randf_along(0, -16.0)
-	Route.guide(node, preload("res://assets/paths/parachute.tres"), 64.0)
+	Route.guide(node, preload("res://assets/paths/parachute.tres"), 64.0, false, node.lose)
 
 
 func hitstop() -> void:
@@ -152,13 +153,13 @@ func _on_health_changed(by: int) -> void:
 
 
 func _on_inventory_changed() -> void:
-	$UI/Bottom/Mail.visible = not Game.inventory.is_empty()
-	$UI/Bottom/Mail/Sprites.display(Game.inventory)
-	$UI/Bottom/Mail/Label.text = "×" + str(Game.inventory.size())
+	$UI/Mail.visible = not Game.inventory.is_empty()
+	$UI/Mail/Sprites.display(Game.inventory)
+	$UI/Mail/Label.text = "×" + str(Game.inventory.size())
 
 
 func _on_place_changed() -> void:
-	var label: Label = $UI/Bottom/PlaceLabel
+	var label: Label = $UI/PlaceForecast
 	label.text = Game.place.type.name
 	label.modulate.a = 1.0
 	label.show()
